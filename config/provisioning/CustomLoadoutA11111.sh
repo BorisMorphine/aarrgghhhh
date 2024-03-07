@@ -14,6 +14,9 @@ MAMBA_PACKAGES=(
   )
   
 PIP_PACKAGES=(
+    "torch"
+    "torch_vision"
+    "torch_audio"
     "ffmpeg"
     "numpy"
     "coverage"
@@ -34,6 +37,7 @@ PIP_PACKAGES=(
   )
 
 EXTENSIONS=(
+    "https://github.com/deforum-art/sd-forge-deforum.git"
     "https://github.com/Mikubill/sd-webui-controlnet"
     "https://github.com/d8ahazard/sd_dreambooth_extension"
     "https://github.com/adieyal/sd-dynamic-prompts"
