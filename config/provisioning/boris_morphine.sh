@@ -126,9 +126,9 @@ function provisioning_start() {
      
     PLATFORM_FLAGS=""
     if [[ $XPU_TARGET = "CPU" ]]; then
-        PLATFORM_FLAGS="--hald-vae --no-hald-controlnet --no-half --api --deforum-api"
+        PLATFORM_FLAGS="--half-vae --no-half"
     fi
-    PROVISIONING_FLAGS="--skip-python-version-check --no-download-sd-model --do-not-download-clip --port 11404 --exit"
+    PROVISIONING_FLAGS="--skip-python-version-check --no-download-sd-model --do-not-download-clip --exit"
     FLAGS_COMBINED="${PLATFORM_FLAGS} $(cat /etc/a1111_webui_flags.conf) ${PROVISIONING_FLAGS}"
     
     # Start and exit because webui will probably require a restart
