@@ -2,7 +2,7 @@
 # This file will be sourced in init.sh
 # Namespace functions with provisioning_
 
-# https://raw.githubusercontent.com/Roldondo/aarrgghhhh/main/config/provisioning/CustomLoadoutA11111.sh
+# https://raw.githubusercontent.com/Roldondo/aarrgghhhh/main/config/provisioning/boris_morphine.sh
 
 ### Edit the following arrays to suit your workflow - values must be quoted and separated by newlines or spaces.
 
