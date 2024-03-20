@@ -14,6 +14,7 @@ models_dir=${webui_dir}/models
 sd_models_dir=${models_dir}/Stable-diffusion
 extensions_dir=${webui_dir}/extensions
 cn_models_dir=${extensions_dir}/sd-webui-controlnet/models
+sr_models_dir=${extensions_dir}/sd-webui-stablesr/models
 vae_models_dir=${models_dir}/VAE
 upscale_models_dir=${models_dir}/ESRGAN
 
@@ -98,11 +99,7 @@ printf "Setting up IceClear...\n"
 if [[ -d sd-webui-stablesr ]]; then
     (cd sd-webui-stablesr && git pull)
 else
-    git clone https://github.com/pkuliyi2015/sd-webui-stablesr.git then
-    (cd sd-webui-stablesr && wget https://huggingface.co/Iceclear/StableSR/resolve/main/stablesr_turbo.ckpt?download=true
-    && wget https://huggingface.co/Iceclear/StableSR/resolve/main/stablesr_768v_000139.ckpt?download=true
-    && wget https://huggingface.co/Iceclear/StableSR/resolve/main/face_vqgan_cfw_00011.ckpt?download=true
-    && wget https://huggingface.co/Iceclear/StableSR/resolve/main/ldmsr4x_finetune_119.ckpt?download=true)
+    git clone https://github.com/pkuliyi2015/sd-webui-stablesr.git
 fi
 
 printf "Setting up Reactor Force...\n"
@@ -297,6 +294,40 @@ model_url=https://huggingface.co/uwg/upscaler/resolve/main/ESRGAN/8x_NMKD-Supers
 
 if [[ ! -e ${model_file} ]]; then
     printf "Downloading 8x_NMKD-Superscale_150000_G...\n"
+    download ${model_url} ${model_file}
+fi
+
+printf "Downloading IceClear SR Models..\n"
+
+model_file=${upscale_models_dir}/stablesr_turbo.ckpt
+model_url=sd-webui-stablesr && wget https://huggingface.co/Iceclear/StableSR/resolve/main/stablesr_turbo.ckpt
+
+if [[ ! -e ${model_file} ]]; then
+    printf "Downloading StableSR Turbo...\n"
+    download ${model_url} ${model_file}
+fi
+
+model_file=${upscale_models_dir}/stablesr_768v_000139.ckpt
+model_url=sd-webui-stablesr && wget https://huggingface.co/Iceclear/StableSR/resolve/main/stablesr_768v_000139.ckpt
+
+if [[ ! -e ${model_file} ]]; then
+    printf "Downloading StableSR 768v\n"
+    download ${model_url} ${model_file}
+fi
+
+model_file=${upscale_models_dir}/face_vqgan_cfw_00011.ckpt
+model_url=sd-webui-stablesr && wget https://huggingface.co/Iceclear/StableSR/resolve/main/face_vqgan_cfw_00011.ckpt
+
+if [[ ! -e ${model_file} ]]; then
+    printf "Downloading StableSR Face VQGAN\n"
+    download ${model_url} ${model_file}
+fi
+
+model_file=${upscale_models_dir}/ldmsr4x_finetune_119.ckpt
+model_url=sd-webui-stablesr && wget https://huggingface.co/Iceclear/StableSR/resolve/main/ldmsr4x_finetune_119.ckpt
+
+if [[ ! -e ${model_file} ]]; then
+    printf "Downloading StableSR Finetune\n"
     download ${model_url} ${model_file}
 fi
 
