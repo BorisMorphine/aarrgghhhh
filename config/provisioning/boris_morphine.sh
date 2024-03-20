@@ -14,7 +14,6 @@ models_dir=${webui_dir}/models
 sd_models_dir=${models_dir}/Stable-diffusion
 extensions_dir=${webui_dir}/extensions
 cn_models_dir=${extensions_dir}/sd-webui-controlnet/models
-sr_models_dir=${extensions_dir}/sd-webui-stablesr/models
 vae_models_dir=${models_dir}/VAE
 upscale_models_dir=${models_dir}/ESRGAN
 
@@ -132,22 +131,22 @@ if [[ ! -e ${model_file} ]]; then
 fi
 
 if [[ $disk_space -ge 25000 ]]; then
-    # # v2-1_768-ema-pruned
-    # model_file=${sd_models_dir}/v2-1_768-ema-pruned.ckpt
-    # model_url=https://huggingface.co/stabilityai/stable-diffusion-2-1/resolve/main/v2-1_768-ema-pruned.ckpt
+    #v2-1_768-ema-pruned
+    model_file=${sd_models_dir}/v2-1_768-ema-pruned.ckpt
+    model_url=https://huggingface.co/stabilityai/stable-diffusion-2-1/resolve/main/v2-1_768-ema-pruned.ckpt
     
-    # if [[ ! -e ${model_file} ]]; then
-    #     printf "Downloading Stable Diffusion 2.1...\n"
-    #     download ${model_url} ${model_file}
-    # fi
+    if [[ ! -e ${model_file} ]]; then
+         printf "Downloading Stable Diffusion 2.1...\n"
+         download ${model_url} ${model_file}
+    fi
     
-    # model_file=${sd_models_dir}/v2-1_768-ema-pruned.ckpt
-    # model_url=https://huggingface.co/stabilityai/stable-diffusion-2-1/resolve/main/v2-1_768-ema-pruned.ckpt
+     model_file=${sd_models_dir}/v2-1_768-ema-pruned.ckpt
+     model_url=https://huggingface.co/stabilityai/stable-diffusion-2-1/resolve/main/v2-1_768-ema-pruned.ckpt
     
-    # if [[ ! -e ${model_file} ]]; then
-    #     printf "Downloading Stable Diffusion 2.1...\n"
-    #     download ${model_url} ${model_file}
-    # fi
+    if [[ ! -e ${model_file} ]]; then
+         printf "Downloading Stable Diffusion 2.1...\n"
+         download ${model_url} ${model_file}
+    fi
     
     
     cd ${sd_models_dir}
@@ -175,23 +174,23 @@ if [[ $disk_space -ge 25000 ]]; then
     fi
 
 
-    # # sd_xl_base_1
-    # model_file=${sd_models_dir}/sd_xl_base_1.0.safetensors
-    # model_url=https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors
+    # sd_xl_base_1
+    model_file=${sd_models_dir}/sd_xl_base_1.0.safetensors
+    model_url=https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors
     
-    # if [[ ! -e ${model_file} ]]; then
-    #     printf "Downloading Stable Diffusion XL base...\n"
-    #     download ${model_url} ${model_file} 
-    # fi
+    if [[ ! -e ${model_file} ]]; then
+        printf "Downloading Stable Diffusion XL base...\n"
+        download ${model_url} ${model_file} 
+    fi
     
-    # # sd_xl_refiner_1
-    # model_file=${sd_models_dir}/sd_xl_refiner_1.0.safetensors
-    # model_url=https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0.safetensors
+    #sd_xl_refiner_1
+    model_file=${sd_models_dir}/sd_xl_refiner_1.0.safetensors
+    model_url=https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0.safetensors
     
-    # if [[ ! -e ${model_file} ]]; then
-    #     printf "Downloading Stable Diffusion XL refiner...\n"
-    #     download ${model_url} ${model_file}
-    # fi
+    if [[ ! -e ${model_file} ]]; then
+        printf "Downloading Stable Diffusion XL refiner...\n"
+        download ${model_url} ${model_file}
+    fi
 else
         printf "\nSkipping extra models (disk < 30GB)\n"
 fi
@@ -247,13 +246,13 @@ if [[ ! -e ${model_file} ]]; then
     download ${model_url} ${model_file}
 fi
 
-# model_file=${vae_models_dir}/sdxl_vae.safetensors
-# model_url=https://huggingface.co/stabilityai/sdxl-vae/resolve/main/sdxl_vae.safetensors
+model_file=${vae_models_dir}/sdxl_vae.safetensors
+model_url=https://huggingface.co/stabilityai/sdxl-vae/resolve/main/sdxl_vae.safetensors
 
-# if [[ ! -e ${model_file} ]]; then
-#     printf "Downloading sdxl_vae...\n"
-#     download ${model_url} ${model_file}
-# fi
+if [[ ! -e ${model_file} ]]; then
+    printf "Downloading sdxl_vae...\n"
+    download ${model_url} ${model_file}
+fi
 
 printf "Downloading Upscalers...\n"
 
