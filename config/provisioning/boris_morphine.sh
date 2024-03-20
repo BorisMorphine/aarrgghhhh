@@ -93,6 +93,18 @@ else
     git clone https://github.com/Coyote-A/ultimate-upscale-for-automatic1111
 fi
 
+# IceClear Super Resolution
+printf "Setting up IceClear...\n"
+if [[ -d sd-webui-stablesr ]]; then
+    (cd sd-webui-stablesr && git pull)
+else
+    git clone https://github.com/pkuliyi2015/sd-webui-stablesr.git then
+    (cd sd-webui-stablesr && wget https://huggingface.co/Iceclear/StableSR/resolve/main/stablesr_turbo.ckpt?download=true
+    && wget https://huggingface.co/Iceclear/StableSR/resolve/main/stablesr_768v_000139.ckpt?download=true
+    && wget https://huggingface.co/Iceclear/StableSR/resolve/main/face_vqgan_cfw_00011.ckpt?download=true
+    && wget https://huggingface.co/Iceclear/StableSR/resolve/main/ldmsr4x_finetune_119.ckpt?download=true)
+fi
+
 printf "Setting up Reactor Force...\n"
 if [[ -d sd-webui-reactor-force ]]; then
     (cd sd-webui-reactor-force && git pull)
