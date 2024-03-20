@@ -1,200 +1,292 @@
-#!/bin/bash
+#!/bin/false
+
 # This file will be sourced in init.sh
-# Namespace functions with provisioning_
 
-# https://raw.githubusercontent.com/Roldondo/aarrgghhhh/main/config/provisioning/boris_morphine.sh
+# https://raw.githubusercontent.com/ai-dock/stable-diffusion-webui/main/config/provisioning/default.sh
+printf "\n##############################################\n#                                            #\n#          Provisioning container            #\n#                                            #\n#         This will take some time           #\n#                                            #\n# Your container will be ready on completion #\n#                                            #\n##############################################\n\n"
 
-### Edit the following arrays to suit your workflow - values must be quoted and separated by newlines or spaces.
-
-DISK_GB_REQUIRED=60
-
-MAMBA_PACKAGES=(
-    "package1"
-    "package2=version"
-  )
-  
-PIP_PACKAGES=(
-    "coverage"
-    "syrupy"
-    "pytest"
-    "tenacity"
-    "pydantic_requests"
-    "moviepy"
-    "numexpr"
-    "matplotlib"
-    "pandas"
-    "av"
-    "pims"
-    "imageio_ffmpeg"
-    "rich"
-    "gdown"
-    "bitsandbytes==0.41.2.post2"
-  )
-
-EXTENSIONS=(
-    "https://github.com/Mikubill/sd-webui-controlnet"
-    "https://github.com/s9roll7/ebsynth_utility"
-    "https://github.com/miaoshouai/miaoshouai-assistant"
-    "https://github.com/Scholar01/sd-webui-mov2mov"
-    "https://github.com/volotat/SD-CN-Animation"
-    "https://github.com/zixaphir/Stable-Diffusion-Webui-Civitai-Helper"    
-)
-
-CHECKPOINT_MODELS=(
-    "https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.ckpt?download=true"
-    "https://huggingface.co/stabilityai/stable-diffusion-2-1/resolve/main/v2-1_768-ema-pruned.safetensors?download=true"
-    "https://civitai.com/api/download/models/344540?type=Model&format=SafeTensor&size=pruned&fp=fp16"
-    "https://civitai.com/api/download/models/344487?type=Model&format=SafeTensor&size=pruned&fp=fp16"
-    "https://huggingface.co/RunDiffusion/Juggernaut-XL-Lightning/resolve/main/Juggernaut_RunDiffusionPhoto2_Lightning_4Steps.safetensors?download=true"
-    "https://civitai.com/api/download/models/288982?type=Model&format=SafeTensor&size=full&fp=fp16"
-)
-
-LORA_MODELS=(
-    "https://civitai.com/api/download/models/16576"
-    "https://civitai.com/api/download/models/229213?modelVersionId=258687"
-    "https://huggingface.co/guoyww/animatediff/resolve/main/v3_sd15_mm.ckpt?download=true"
-    "https://civitai.com/api/download/models/367245?type=Model&format=SafeTensor&size=pruned&fp=fp16"
-)
-
-VAE_MODELS=(
-    "https://huggingface.co/stabilityai/sd-vae-ft-ema-original/resolve/main/vae-ft-ema-560000-ema-pruned.safetensors?download=true"
-    "https://huggingface.co/stabilityai/sd-vae-ft-mse-original/resolve/main/vae-ft-mse-840000-ema-pruned.safetensors?download=true"
-    "https://huggingface.co/stabilityai/sdxl-vae/resolve/main/sdxl_vae.safetensors?download=true"
-)
-
-ESRGAN_MODELS=(
-    "https://huggingface.co/ai-forever/Real-ESRGAN/resolve/main/RealESRGAN_x4.pth?download=true"
-    "https://huggingface.co/FacehugmanIII/4x_foolhardy_Remacri/resolve/main/4x_foolhardy_Remacri.pth?download=true"
-    "https://huggingface.co/Akumetsu971/SD_Anime_Futuristic_Armor/resolve/main/4x_NMKD-Siax_200k.pth?download=true"
-)
-
-SR_MODELS=(
-    "https://huggingface.co/Iceclear/StableSR/blob/main/webui_768v_139.ckpt?download=true"
-    "https://huggingface.co/Iceclear/StableSR/resolve/main/face_vqgan_cfw_00011.ckpt?download=true"
-    "https://huggingface.co/Iceclear/StableSR/resolve/main/ldmsr4x_finetune_119.ckpt?download=true"
-    "https://huggingface.co/Iceclear/StableSR/resolve/main/stablesr_turbo.ckpt?download=true"
-)
-
-CONTROLNET_MODELS=(
-    "https://civitai.com/api/download/models/181335"
-)
-
-### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
-
-function provisioning_start() {
-    source /opt/ai-dock/etc/environment.sh
-    DISK_GB_AVAILABLE=$(($(df --output=avail -m "${WORKSPACE}" | tail -n1) / 1000))
-    DISK_GB_USED=$(($(df --output=used -m "${WORKSPACE}" | tail -n1) / 1000))
-    DISK_GB_ALLOCATED=$(($DISK_GB_AVAILABLE + $DISK_GB_USED))
-    provisioning_print_header
-    provisioning_get_mamba_packages
-    provisioning_get_pip_packages
-    provisioning_get_extensions
-    provisioning_get_models \
-        "${WORKSPACE}/opt/storage/stable_diffusion/models/ckpt" \
-        "${CHECKPOINT_MODELS[@]}"
-    provisioning_get_models \
-        "${WORKSPACE}/opt/storage/stable_diffusion/models/lora" \
-        "${LORA_MODELS[@]}"
-    provisioning_get_models \
-        "${WORKSPACE}/opt/storage/stable_diffusion/models/controlnet" \
-        "${CONTROLNET_MODELS[@]}"
-    provisioning_get_models \
-        "${WORKSPACE}/opt/storage/stable_diffusion/models/vae" \
-        "${VAE_MODELS[@]}"
-    provisioning_get_models \
-        "${WORKSPACE}/opt/storage/stable_diffusion/models/esrgan" \
-        "${ESRGAN_MODELS[@]}"
-    provisioning_get_models \
-        "${WORKSPACE}/opt/storage/stable_diffusion/models/esrgan" \
-        "${ESRGAN_MODELS[@]}"
-    provisioning_get_models \
-        "${WORKSPACE}/opt/stable-diffusion-webui/models/SR" \
-        "${SR_MODELS[@]}"
-     
-    PLATFORM_FLAGS=""
-    if [[ $XPU_TARGET = "CPU" ]]; then
-        PLATFORM_FLAGS="--no-half-vae --no-half --no-half-controlnet"
-    fi
-    PROVISIONING_FLAGS="--skip-python-version-check --no-download-sd-model --do-not-download-clip --exit"
-    FLAGS_COMBINED="${PLATFORM_FLAGS} $(cat /etc/a1111_webui_flags.conf) ${PROVISIONING_FLAGS}"
-    
-    # Start and exit because webui will probably require a restart
-    cd /opt/stable-diffusion-webui && \
-    micromamba run -n webui -e LD_PRELOAD=libtcmalloc.so python launch.py \
-        ${FLAGS_COMBINED}
-    provisioning_print_end
+function download() {
+    wget -q --show-progress -e dotbytes="${3:-4M}" -O "$2" "$1"
 }
+disk_space=$(df --output=avail -m $WORKSPACE|tail -n1)
+webui_dir=/opt/stable-diffusion-webui
+models_dir=${webui_dir}/models
+sd_models_dir=${models_dir}/Stable-diffusion
+extensions_dir=${webui_dir}/extensions
+cn_models_dir=${extensions_dir}/sd-webui-controlnet/models
+vae_models_dir=${models_dir}/VAE
+upscale_models_dir=${models_dir}/ESRGAN
 
-function provisioning_get_mamba_packages() {
-    if [[ -n $MAMBA_PACKAGES ]]; then
-        $MAMBA_INSTALL -n webui ${MAMBA_PACKAGES[@]}
-    fi
-}
+mkdir -p ${upscale_models_dir}
 
-function provisioning_get_pip_packages() {
-    if [[ -n $PIP_PACKAGES ]]; then
-        micromamba run -n webui $PIP_INSTALL ${PIP_PACKAGES[@]}
-    fi
-}
+printf "Downloading extensions..."
+cd $extensions_dir
 
-function provisioning_get_extensions() {
-    for repo in "${EXTENSIONS[@]}"; do
-        dir="${repo##*/}"
-        path="/opt/stable-diffusion-webui/extensions/${dir}"
-        requirements="${path}/requirements.txt"
-        if [[ -d $path ]]; then
-            if [[ ${AUTO_UPDATE,,} != "false" ]]; then
-                printf "Updating extension: %s...\n" "${repo}"
-                ( cd "$path" && git pull )
-                if [[ -e $requirements ]]; then
-                    micromamba -n webui run ${PIP_INSTALL} -r "$requirements"
-                fi
-            fi
-        else
-            printf "Downloading extension: %s...\n" "${repo}"
-            git clone "${repo}" "${path}" --recursive
-            if [[ -e $requirements ]]; then
-                micromamba -n webui run ${PIP_INSTALL} -r "${requirements}"
-            fi
-        fi
-    done
-}
+# Controlnet
+printf "Setting up Controlnet...\n"
+if [[ -d sd-webui-controlnet ]]; then
+    (cd sd-webui-controlnet && \
+        git pull && \
+        micromamba run -n webui ${PIP_INSTALL} -r requirements.txt
+    )
+else
+    (git clone https://github.com/Mikubill/sd-webui-controlnet && \
+         micromamba run -n webui ${PIP_INSTALL} -r sd-webui-controlnet/requirements.txt
+    )
+fi
 
-function provisioning_get_models() {
-    if [[ -z $2 ]]; then return 1; fi
-    dir="$1"
-    mkdir -p "$dir"
-    shift
-    if [[ $DISK_GB_ALLOCATED -ge $DISK_GB_REQUIRED ]]; then
-        arr=("$@")
+if [[ $XPU_TARGET != "CPU" && $WEBUI_FLAGS != *"--use-cpu all"* ]]; then
+    # Dreambooth
+    printf "Setting up Dreambooth...\n"
+    if [[ -d sd_dreambooth_extension ]]; then
+        (cd sd_dreambooth_extension && \
+            git pull && \
+            micromamba run -n webui ${PIP_INSTALL} -r requirements.txt
+        )
     else
-        printf "WARNING: Low disk space allocation - Only the first model will be downloaded!\n"
-        arr=("$1")
+        (git clone https://github.com/d8ahazard/sd_dreambooth_extension && \
+            micromamba run -n webui ${PIP_INSTALL} -r sd_dreambooth_extension/requirements.txt
+        )
     fi
+fi
+
+# Dynamic Prompts
+printf "Setting up Dynamic Prompts...\n"
+if [[ -d sd-dynamic-prompts ]]; then
+    (cd sd-dynamic-prompts && git pull)
+else
+    git clone https://github.com/adieyal/sd-dynamic-prompts.git
+    micromamba run -n webui ${PIP_INSTALL} -U \
+        dynamicprompts[attentiongrabber,magicprompt]~=0.29.0 \
+        send2trash~=1.8
+fi
+
+# Face Editor
+printf "Setting up Face Editor...\n"
+if [[ -d sd-face-editor ]]; then
+    (cd sd-face-editor && git pull)
+else
+    git clone https://github.com/ototadana/sd-face-editor.git
+fi
+
+# Image Browser
+printf "Setting up Image Browser...\n"
+if [[ -d stable-diffusion-webui-images-browser ]]; then
+    (cd stable-diffusion-webui-images-browser && git pull)
+else
+    git clone https://github.com/yfszzx/stable-diffusion-webui-images-browser
+fi
+
+# Regional Prompter
+printf "Setting up Regional Prompter...\n"
+if [[ -d sd-webui-regional-prompter ]]; then
+    (cd sd-webui-regional-prompter && git pull)
+else
+    git clone https://github.com/hako-mikan/sd-webui-regional-prompter.git
+fi
+
+# Ultimate Upscale
+printf "Setting up Ultimate Upscale...\n"
+if [[ -d ultimate-upscale-for-automatic1111 ]]; then
+    (cd ultimate-upscale-for-automatic1111 && git pull)
+else
+    git clone https://github.com/Coyote-A/ultimate-upscale-for-automatic1111
+fi
+
+printf "Setting up Reactor Force...\n"
+if [[ -d sd-webui-reactor-force ]]; then
+    (cd sd-webui-reactor-force && git pull)
+else
+    (git clone https://github.com/Gourieff/sd-webui-reactor-force && \
+            micromamba run -n webui ${PIP_INSTALL} -r sd-webui-reactor-force/requirements.txt
+        )
+
+    (mkdir -p ${models_dir}/insightface && wget -P ${models_dir}/insightface "https://huggingface.co/ashleykleynhans/inswapper/resolve/main/inswapper_128.onnx")
+fi
+
+printf "Setting up Adetailer...\n"
+if [[ -d adetailer ]]; then
+    (cd adetailer && git pull)
+else
+    (git clone https://github.com/Bing-su/adetailer && \
+        micromamba run -n webui python adetailer/install.py)
+fi
+
+
+# v1-5-pruned-emaonly
+model_file=${sd_models_dir}/_v1-5-pruned-emaonly.ckpt
+model_url=https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.ckpt
+
+if [[ ! -e ${model_file} ]]; then
+    printf "Downloading Stable Diffusion 1.5...\n"
+    download ${model_url} ${model_file}
+fi
+
+if [[ $disk_space -ge 25000 ]]; then
+    # # v2-1_768-ema-pruned
+    # model_file=${sd_models_dir}/v2-1_768-ema-pruned.ckpt
+    # model_url=https://huggingface.co/stabilityai/stable-diffusion-2-1/resolve/main/v2-1_768-ema-pruned.ckpt
     
-    printf "Downloading %s model(s) to %s...\n" "${#arr[@]}" "$dir"
-    for url in "${arr[@]}"; do
-        printf "Downloading: %s\n" "${url}"
-        provisioning_download "${url}" "${dir}"
-        printf "\n"
-    done
-}
-
-function provisioning_print_header() {
-    printf "\n##############################################\n#                                            #\n#          Provisioning container            #\n#                                            #\n#         This will take some time           #\n#                                            #\n# Your container will be ready on completion #\n#                                            #\n##############################################\n\n"
-    if [[ $DISK_GB_ALLOCATED -lt $DISK_GB_REQUIRED ]]; then
-        printf "WARNING: Your allocated disk size (%sGB) is below the recommended %sGB - Some models will not be downloaded\n" "$DISK_GB_ALLOCATED" "$DISK_GB_REQUIRED"
+    # if [[ ! -e ${model_file} ]]; then
+    #     printf "Downloading Stable Diffusion 2.1...\n"
+    #     download ${model_url} ${model_file}
+    # fi
+    
+    # model_file=${sd_models_dir}/v2-1_768-ema-pruned.ckpt
+    # model_url=https://huggingface.co/stabilityai/stable-diffusion-2-1/resolve/main/v2-1_768-ema-pruned.ckpt
+    
+    # if [[ ! -e ${model_file} ]]; then
+    #     printf "Downloading Stable Diffusion 2.1...\n"
+    #     download ${model_url} ${model_file}
+    # fi
+    
+    
+    cd ${sd_models_dir}
+    if [[ ! -e "epicphotogasm_y.safetensors" ]]; then
+        printf "Download epicphotogasm_y\n"
+        wget --trust-server-names --content-disposition "https://civitai.com/api/download/models/197181" # Epicphotoasm
     fi
-}
+    if [[ ! -e "cyberrealistic_classicV20.safetensors" ]]; then
+        wget --trust-server-names --content-disposition "https://civitai.com/api/download/models/165271" # CyberRealistic Classic 2.0
+    fi
+    if [[ ! -e "cyberrealistic_v40.safetensors" ]]; then
+        wget --trust-server-names --content-disposition "https://civitai.com/api/download/models/198401" # CyberRealistic 4.0
+    fi
+    if [[ ! -e "realisticVisionV51_v51VAE.safetensors" ]]; then
+         wget --trust-server-names --content-disposition "https://civitai.com/api/download/models/130072" # RealisticVision V5.1
+    fi
+    if [[ ! -e "analogMadness_v60.safetensors" ]]; then
+        wget --trust-server-names --content-disposition "https://civitai.com/api/download/models/160495" # AnalogMadness V6.0
+    fi
+    if [[ ! -e "aZovyaPhotoreal_v2.safetensors" ]]; then
+        wget --trust-server-names --content-disposition "https://civitai.com/api/download/models/99805" # A-Zovya Photoreal V2
+    fi
+    if [[ ! -e "epicrealism_naturalSin.safetensors" ]]; then
+        wget --trust-server-names --content-disposition "https://civitai.com/api/download/models/160989" # epiCRealism Natural Sin
+    fi
 
-function provisioning_print_end() {
-    printf "\nProvisioning complete:  Web UI will start now\n\n"
-}
 
-# Download from $1 URL to $2 file path
-function provisioning_download() {
-    wget -qnc --content-disposition --show-progress -e dotbytes="${3:-4M}" -P "$2" "$1"
-}
+    # # sd_xl_base_1
+    # model_file=${sd_models_dir}/sd_xl_base_1.0.safetensors
+    # model_url=https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors
+    
+    # if [[ ! -e ${model_file} ]]; then
+    #     printf "Downloading Stable Diffusion XL base...\n"
+    #     download ${model_url} ${model_file} 
+    # fi
+    
+    # # sd_xl_refiner_1
+    # model_file=${sd_models_dir}/sd_xl_refiner_1.0.safetensors
+    # model_url=https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0.safetensors
+    
+    # if [[ ! -e ${model_file} ]]; then
+    #     printf "Downloading Stable Diffusion XL refiner...\n"
+    #     download ${model_url} ${model_file}
+    # fi
+else
+        printf "\nSkipping extra models (disk < 30GB)\n"
+fi
+printf "Downloading a few pruned controlnet models...\n"
 
-provisioning_start
+model_file=${cn_models_dir}/control_canny-fp16.safetensors
+model_url=https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_canny-fp16.safetensors
+
+if [[ ! -e ${model_file} ]]; then
+    printf "Downloading Canny...\n"
+    download ${model_url} ${model_file}
+fi
+
+model_file=${cn_models_dir}/control_depth-fp16.safetensors
+model_url=https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_depth-fp16.safetensors
+
+if [[ ! -e ${model_file} ]]; then
+    printf "Downloading Depth...\n"
+    download ${model_url} ${model_file}
+fi
+
+model_file=${cn_models_dir}/control_openpose-fp16.safetensors
+model_url=https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_openpose-fp16.safetensors
+
+if [[ ! -e ${model_file} ]]; then
+    printf "Downloading Openpose...\n"
+    download ${model_url} ${model_file}
+fi
+
+model_file=${cn_models_dir}/control_scribble-fp16.safetensors
+model_url=https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_scribble-fp16.safetensors
+
+if [[ ! -e ${model_file} ]]; then
+    printf "Downloading Scribble...\n"
+    download ${model_url} ${model_file}
+fi
+
+printf "Downloading VAE...\n"
+
+model_file=${vae_models_dir}/vae-ft-ema-560000-ema-pruned.safetensors
+model_url=https://huggingface.co/stabilityai/sd-vae-ft-ema-original/resolve/main/vae-ft-ema-560000-ema-pruned.safetensors
+
+if [[ ! -e ${model_file} ]]; then
+    printf "Downloading vae-ft-ema-560000-ema...\n"
+    download ${model_url} ${model_file}
+fi
+
+model_file=${vae_models_dir}/vae-ft-mse-840000-ema-pruned.safetensors
+model_url=https://huggingface.co/stabilityai/sd-vae-ft-mse-original/resolve/main/vae-ft-mse-840000-ema-pruned.safetensors
+
+if [[ ! -e ${model_file} ]]; then
+    printf "Downloading vae-ft-mse-840000-ema...\n"
+    download ${model_url} ${model_file}
+fi
+
+# model_file=${vae_models_dir}/sdxl_vae.safetensors
+# model_url=https://huggingface.co/stabilityai/sdxl-vae/resolve/main/sdxl_vae.safetensors
+
+# if [[ ! -e ${model_file} ]]; then
+#     printf "Downloading sdxl_vae...\n"
+#     download ${model_url} ${model_file}
+# fi
+
+printf "Downloading Upscalers...\n"
+
+model_file=${upscale_models_dir}/4x_foolhardy_Remacri.pth
+model_url=https://huggingface.co/FacehugmanIII/4x_foolhardy_Remacri/resolve/main/4x_foolhardy_Remacri.pth
+
+if [[ ! -e ${model_file} ]]; then
+    printf "Downloading 4x_foolhardy_Remacri...\n"
+    download ${model_url} ${model_file}
+fi
+
+model_file=${upscale_models_dir}/4x_NMKD-Siax_200k.pth
+model_url=https://huggingface.co/Akumetsu971/SD_Anime_Futuristic_Armor/resolve/main/4x_NMKD-Siax_200k.pth
+
+if [[ ! -e ${model_file} ]]; then
+    printf "Downloading 4x_NMKD-Siax_200k...\n"
+    download ${model_url} ${model_file}
+fi
+
+model_file=${upscale_models_dir}/RealESRGAN_x4.pth
+model_url=https://huggingface.co/ai-forever/Real-ESRGAN/resolve/main/RealESRGAN_x4.pth
+
+if [[ ! -e ${model_file} ]]; then
+    printf "Downloading RealESRGAN_x4...\n"
+    download ${model_url} ${model_file}
+fi
+
+model_file=${upscale_models_dir}/4x_NMKD-Superscale-SP_178000_G.pthh
+model_url=https://huggingface.co/gemasai/4x_NMKD-Superscale-SP_178000_G/resolve/main/4x_NMKD-Superscale-SP_178000_G.pth
+
+if [[ ! -e ${model_file} ]]; then
+    printf "Downloading 4x_NMKD-Superscale-SP_178000_G...\n"
+    download ${model_url} ${model_file}
+fi
+
+model_file=${upscale_models_dir}/8x_NMKD-Superscale_150000_G.pth
+model_url=https://huggingface.co/uwg/upscaler/resolve/main/ESRGAN/8x_NMKD-Superscale_150000_G.pth
+
+if [[ ! -e ${model_file} ]]; then
+    printf "Downloading 8x_NMKD-Superscale_150000_G...\n"
+    download ${model_url} ${model_file}
+fi
+
+printf "\nProvisioning complete:  Web UI will start now\n\n"
+
