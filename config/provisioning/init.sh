@@ -1,4 +1,103 @@
-#!/bin/bash
+#!bin/bash
+
+sudo bash git remote add forge https://github.com/lllyasviel/stable-diffusion-webui-forge
+git branch lllyasviel/main
+git checkout lllyasviel/main
+git fetch forge
+git branch -u forge/main
+git pull
+
+install_dir="/home/$(whoami)"
+
+# Name of the subdirectory
+clone_dir="stable-diffusion-webui"
+
+# Set environment variables for directories
+export extensions="${data_dir}/extensions"
+export embeddings="${data_dir}/embeddings"
+export models="${data_dir}/models"
+export ckpt="${models}/Stable-diffusion"
+export lora="${models}/Lora"
+export vae="${models}/VAE"
+export hypernetworks="${models}/hypernetworks"
+export ESRGAN="${models}/ESRGAN"
+
+# Commandline arguments for webui.py, for example: export COMMANDLINE_ARGS="--medvram --opt-split-attention"
+export COMMANDLINE_ARGS=""
+
+# Set environment variables for model directories
+annotators_dir="${models}/annnotators"
+codeformers_dir="${models}/Codeformer"
+controlnet_dir="${models}/ControlNet"
+deepbooru_dir="${models}/deepbooru"
+dreambooth_dir="${models}/dreambooth"
+gfpgan_dir="${models}/GFPGAN"
+insightface_dir="${models}/insightface"
+karlo_dir="${models}/models/karlo"
+LDSR_dir="${models}/LDSR"
+swinIR_dir="${models}/swinIR"
+vae_approx_dir="${models}/VAE-approx"
+
+# Setup additional repositories (ensure you're in the correct directory for these operations)
+install git lfs
+cd ${controlnet_dir}
+git lfs
+git clone Deliberate_v.5.safetensors https://huggingface.co/XpucT/Deliberate/blob/main/Deliberate_v5.safetensors
+git lfs
+git clone Deliberate_v.5.safetensors https://huggingface.co/XpucT/Deliberate/blob/main/Deliberate_v5.safetensors
+https://huggingface.co/XpucT/Deliberate/blob/main/Deliberate_v5-inpainting.safetensors
+
+cd ${ESRGAN}
+wget -O 4xUltraSharp.pth https://huggingface.co/uwg/upscaler/resolve/main/ESRGAN/4x-UltraSharp.pth
+wget -O 4xUltraMix_Balanced.pth https://mega.nz/folder/qZRBmaIY#nIG8KyWFcGNTuMX_XNbJ_g/file/KBJRBQyR
+wget -O 4xUltraMix_Restore.pth https://mega.nz/folder/qZRBmaIY#nIG8KyWFcGNTuMX_XNbJ_g/file/KBJRBQyR
+wget -O 4xUltraMix_Smooth.pth https://mega.nz/folder/qZRBmaIY#nIG8KyWFcGNTuMX_XNbJ_g/file/PIRDEYgT
+wget -O 4x-FSDedither.pth https://drive.google.com/uc?export=download&confirm=1&id=1H4KQyhcknOoExjvDdsoxAgTBMO7JuJ3w
+wget -O 8xESRGAN.pth https://icedrive.net/1/43GNBihZyi
+wget -O 16xESRGAN.pth https://objectstorage.us-phoenix-1.oraclecloud.com/n/ax6ygfvpvzka/b/open-modeldb-files/o/16x-ESRGAN.pth
+wget -O 1x_GainRESV3_Aggro.pth https://mega.nz/folder/yg0lHQoJ#sP8_BfDk2YlshFjOL9Qrtg/file/TlkHjITR
+wget -O 1x_GainRESV3_Nautral.pth https://mega.nz/folder/yg0lHQoJ#sP8_BfDk2YlshFjOL9Qrtg/file/KxkVEaAQ
+wget -O 1x_GainRESV3_Passive.pth https://mega.nz/folder/yg0lHQoJ#sP8_BfDk2YlshFjOL9Qrtg/file/H49nEAzI
+wget -O 4xNomos8kDAT.pth https://drive.usercontent.google.com/download?id=1JRwXYeuMBIsyeNfsTfeSs7gsHqCZD7x
+wget -O 4xLSDIRplus.pth https://github.com/Phhofm/models/blob/main/4xLSDIRplus/4xLSDIRplus.pth
+wget -0 BSRGAN https://github.com/cszn/KAIR/releases/download/v1.0/BSRGAN.pth
+
+cd ${ckpt}
+wget https://huggingface.co/stabilityai/sdxl-turbo/blob/main/sd_xl_turbo_1.0.safetensors
+
+cd ${lora}
+wget -O weird_lanscape.safetensors https://civitai.com/api/download/models/309330?type=Model&format=SafeTensor
+wget -O sheet_of_acid.sadetensors https://civitai.com/api/download/models/145277?type=Model&format=SafeTensor
+wget -O gonzo.safetensors https://civitai.com/api/download/models/127015?type=Model&format=SafeTensor
+
+# Build StableSR
+cd ${extensions}
+git clone https://github.com/pkuliyi2015/sd-webui-stablesr.git
+cd /scripts
+wget -O stablesr_turbo.ckpt https://huggingface.co/Iceclear/StableSR/blob/main/stablesr_turbo.ckpt
+
+# Build DeOldify
+cd ${extensions}
+git clone https://github.com/SpenserCai/modles/sd-webui-deoldify.git
+cd ${extensions}/DeOldify/models/Deoldify
+wget -O ColorizeArtistic_gen.pth https://data.deepai.org/deoldify/ColorizeArtistic_gen.pth
+wget -O ColorizeArtistic_crit https://www.dropbox.com/s/xpq2ip9occuzgen/ColorizeArtistic_crit.pth
+wget -O ColorizeArtisitic_PretrainOnly.pth https://www.dropbox.com/s/h782d1zar3vdblw/ColorizeArtistic_PretrainOnly_gen.pth
+wget -O ColorizeArtistic_PretrainOnly.pth https://www.dropbox.com/s/gr81b3pkidwlrc7/ColorizeArtistic_PretrainOnly_crit.pth
+wget -O ColorizeStable_gen.pth https://www.dropbox.com/s/axsd2g85uyixaho/ColorizeStable_gen.pth
+wget -O ColorizeStable_crit.pth https://www.dropbox.com/s/xpq2ip9occuzgen/ColorizeStable_crit.pth
+wget -O ColorizeStable_PretrainOnly_gen.pth https://www.dropbox.com/s/h782d1zar3vdblw/ColorizeStable_PretrainOnly_gen.pth
+wget -O ColorizeStable_PretrainOnly_crit.pth https://www.dropbox.com/s/gr81b3pkidwlrc7/ColorizeStable_PretrainOnly_crit.pth
+wget -O ColorizeVideo_gen.pth https://www.dropbox.com/s/axsd2g85uyixaho/ColorizeVideo_gen.pth
+wget -O ColorizeVideo_crit.pth https://www.dropbox.com/s/xpq2ip9occuzgen/ColorizeVideo_crit.pth
+wget -O ColorizeVideo_PretrainOnly_gen.pth  https://www.dropbox.com/s/h782d1zar3vdblw/ColorizeVideo_PretrainOnly_gen.pth
+wget -O ColorizeVideo_PretrainOnly_crit.pth https://www.dropbox.com/s/gr81b3pkidwlrc7/ColorizeVidoe_PretrainOnly_crit.pth
+wget -O Deoldify790000.pth https://drive.google.com/uc?export=download&confirm=1&id=1-mxmDF1Dh-PnQqRz_PeCrvsTkHjYCbi3
+
+# Add any additional model download or setup commands here
+# Remember to adjust commands for services like Google Drive or Mega as needed
+
+# Final steps or cleanup, if necessary
 
 cd /workspace
 sudo wget -O -force stable-diffusion-webui https://github.com/lllyasviel/stable-diffusion-webui-forge 
@@ -36,12 +135,6 @@ wget -O  1x_NMKD-h264Texturize_500k.pth https://icedrive.io/download?p=Q3Y7zO1b
 wget -O 8x_NMKD-SUPERSCALE_150000_G https://icedrive.io/download?p=Q3Y7zO1byHKbp_6dk4z8vLT9s7pTRI6x8IB4006YWiM.hewQ706SaIhk7lSe0y__B.2EQkV2AjhbopISfrZQakFWwg9lsYtqHvDO0zGXZSdcMOwQcUGWT1Zz89h.bzuE6kHnd0AV8ehoUcW7WQlM_M.QgnRsxC6ncOV99qLFVioHdQRr7DXT1YL0MA87LtDCLJqkHZD8rczLen8twcloeuuzUBXdcViipJ5zwAgLHWQ-
 wget -O 4x-Nomos8kHAT-L https://openmodeldb.info/models/4x-Nomos8kHAT-L-otf#:~:text=Download%20(158.1,by%20Google%20Drive
 wget -O Deoldify790000.pth https://drive.google.com/uc?export=download&confirm=1&id=1-mxmDF1Dh-PnQqRz_PeCrvsTkHjYCbi3
-
-mkdir Augmentation_Presets
-cd /Augmentation_Presets
-wget -O custom_blur.yaml https://mega.nz/folder/qZRBmaIY#nIG8KyWFcGNTuMX_XNbJ_g/file/LYhG3ZKS
-wget -O custom_noise.yaml https://mega.nz/folder/qZRBmaIY#nIG8KyWFcGNTuMX_XNbJ_g/file/vUp2BRIa
-wget -O custom_resize.yaml https://mega.nz/folder/qZRBmaIY#nIG8KyWFcGNTuMX_XNbJ_g/file/GQhmnZTb
 
 cd /opt/stable-diffusion-webui/models/Stable-diffusion
 wget https://huggingface.co/stabilityai/sdxl-turbo/blob/main/sd_xl_turbo_1.0.safetensors
