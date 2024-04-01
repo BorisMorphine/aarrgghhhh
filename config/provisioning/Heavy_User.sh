@@ -1,41 +1,54 @@
-#!bin/bash
+!#bin/bash
 
-cd /workspace
-sudo bash git remote add forge https://github.com/lllyasviel/stable-diffusion-webui-forge
+### Step 1 ###
+
+# cd Home 
+cd /Home/User/
+
+# Get A1111
+git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git
+
+# start service
+./webui.sh
+
+### Step 2 ###
+
+# Get Forge
+git clone https://github.com/lllyasviel/stable-diffusion-webui-forge
+
+# update webui-user.sh
+sudo curl -O webui-user.sh https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/webui-user.sh
+
+# update webui-user.bat
+sudo curl -O https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/build/webui-user.bat
+
+# Set global variable
+git config --global pull.rebase false
+
+# cd to main repo and clone Forge
+cd /workspace/stable-diffusion-webui/
+git remote add forge https://github.com/lllyasviel/stable-diffusion-webui-forge
 git branch lllyasviel/main
 git checkout lllyasviel/main
 git fetch forge
 git branch -u forge/main
-git pull
+git pull 
 
-# Name of the subdirectory
-clone_dir="stable-diffusion-webui"
+### Step 3 ###
 
-# Set environment variables for directories
-export extensions="${data_dir}/extensions"
-export embeddings="${data_dir}/embeddings"
-export models="${data_dir}/models"
-export ckpt="${models}/Stable-diffusion"
-export lora="${models}/Lora"
-export vae="${models}/VAE"
-export hypernetworks="${models}/hypernetworks"
-export ESRGAN="${models}/ESRGAN"
+# cd back into Forge via Workspace and update user docs
+cd /workspace/home/user/stable-diffusuion-webui-forge/
 
-# Commandline arguments for webui.py, for example: export COMMANDLINE_ARGS="--medvram --opt-split-attention"
-export COMMANDLINE_ARGS="--port 3001 --listen --api --xformers --enable-insecure-extension-access --no-half-vae"
+# Run script
+bash ./webui-user.sh
 
-# Set environment variables for model directories
-annotators_dir="${models}/annnotators"
-codeformers_dir="${models}/Codeformer"
-controlnet_dir="${models}/ControlNet"
-deepbooru_dir="${models}/deepbooru"
-dreambooth_dir="${models}/dreambooth"
-gfpgan_dir="${models}/GFPGAN"
-insightface_dir="${models}/insightface"
-karlo_dir="${models}/models/karlo"
-LDSR_dir="${models}/LDSR"
-swinIR_dir="${models}/swinIR"
-vae_approx_dir="${models}/VAE-approx"
+# Run backup script
+bash ./webui-user.bat
+
+# & start service
+./webui.sh
+
+### Step 4 ###
 
 # Setup additional repositories (ensure you're in the correct directory for these operations)
 install git lfs
