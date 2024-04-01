@@ -22,7 +22,7 @@ export hypernetworks="${models}/hypernetworks"
 export ESRGAN="${models}/ESRGAN"
 
 # Commandline arguments for webui.py, for example: export COMMANDLINE_ARGS="--medvram --opt-split-attention"
-export COMMANDLINE_ARGS="export COMMANDLINE_ARGS="--port 3001 --listen --api --xformers --enable-insecure-extension-access --no-half-vae"
+export COMMANDLINE_ARGS="--port 3001 --listen --api --xformers --enable-insecure-extension-access --no-half-vae"
 
 # Set environment variables for model directories
 annotators_dir="${models}/annnotators"
