@@ -1,6 +1,6 @@
 #!bin/bash
 
-cd /workspace/Home/
+cd /workspace
 sudo bash git remote add forge https://github.com/lllyasviel/stable-diffusion-webui-forge
 git branch lllyasviel/main
 git checkout lllyasviel/main
