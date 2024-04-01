@@ -1,13 +1,12 @@
 #!bin/bash
 
+cd /workspace/Home/
 sudo bash git remote add forge https://github.com/lllyasviel/stable-diffusion-webui-forge
 git branch lllyasviel/main
 git checkout lllyasviel/main
 git fetch forge
 git branch -u forge/main
 git pull
-
-install_dir="/home/$(whoami)"
 
 # Name of the subdirectory
 clone_dir="stable-diffusion-webui"
@@ -23,7 +22,7 @@ export hypernetworks="${models}/hypernetworks"
 export ESRGAN="${models}/ESRGAN"
 
 # Commandline arguments for webui.py, for example: export COMMANDLINE_ARGS="--medvram --opt-split-attention"
-export COMMANDLINE_ARGS=""
+export COMMANDLINE_ARGS="export COMMANDLINE_ARGS="--port 3001 --listen --api --xformers --enable-insecure-extension-access --no-half-vae"
 
 # Set environment variables for model directories
 annotators_dir="${models}/annnotators"
