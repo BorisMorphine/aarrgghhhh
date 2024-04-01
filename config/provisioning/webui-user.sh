@@ -66,7 +66,7 @@ wget https://huggingface.co/stabilityai/sdxl-turbo/blob/main/sd_xl_turbo_1.0.saf
 
 cd ${lora}
 wget -O weird_lanscape.safetensors https://civitai.com/api/download/models/309330?type=Model&format=SafeTensor
-wget -O sheet_of_acid.sadetensors https://civitai.com/api/download/models/145277?type=Model&format=SafeTensor
+wget -O sheet_of_acid.safetensors https://civitai.com/api/download/models/145277?type=Model&format=SafeTensor
 wget -O gonzo.safetensors https://civitai.com/api/download/models/127015?type=Model&format=SafeTensor
 
 # Build StableSR
