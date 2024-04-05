@@ -1,32 +1,27 @@
 cd /opt/
 micromamba deactivate activate base
 sudo micromamba run -n webui git clone https://github.com/lllyasviel/stable-diffusion-webui-forge.git
-mv /opt/stable-diffusion-webui /opt/stable-diffusion-forge-webui/extensions/A1111
-/opt/stable-diffusion-forge-webui/ /opt/stable-diffusion-webui/
-cd /opt/stable-diffusion-webui/
-./webui.sh | bash sudo
-
-micromamba deactivate activate base
-
-rsync -av “/opt/stable-diffusion-webui” + “/opt/stable-diffusion-webui/extensions/stable-diffusion-webui-forge“  “/opt/stable-diffusion-webui“
-echo "Synced “/opt/stable-diffusion-webui to /opt/stable-diffusion-webui/extensions/stable-diffusion-webui”
 
 git branch -u forge/main
 git pull 
 git config pull.rebase false
+/opt/stable-diffusion-forge-webui/ /opt/stable-diffusion-webui/
+cd /opt/stable-diffusion-webui/
+./webui.sh | bash sudo
 
-# Virtual environment directory (defaults to a specific path within the install directory)
-venv_dir=“opt/micromamba/envs/webui”
+mv /opt/stable-diffusion-webui /opt/stable-diffusion-forge-webui/extensions/A1111
+rsync -av “/opt/stable-diffusion-webui” “/opt/stable-diffusion-webui/extensions/A1111“
+echo "Synced “/opt/stable-diffusion-webui to /opt/stable-diffusion-webui/extensions/A1111”
 
+micromamba deactivate activate base
 micromamba run -n python_310 
+venv_dir=“opt/micromamba/envs/webui”
 export COMMANDLINE_ARGS="--port 7860 --listen --api --xformers --autolaunch”
 export GIT="git"
 export LAUNCH_SCRIPT="launch.py"
 export TORCH_COMMAND="pip install torch==1.12.1+cu113 --extra-index-url https://download.pytorch.org/whl/cu113"
 export REQS_FILE="requirements.txt"
-
-### Step 3 ###
-set SDFORGE=“opt/stable-diffusion-webui/extensions/stable-diffusion-webui-forge”
+set SDFORGE=“opt/stable-diffusion-webui/”
 set models_dir=“{$SDFORGE}/models”
 set forge_models=“{$SDFORGE}/models_forge”
 set extensions_dir=“{$SDFORGE/extensions”
@@ -35,7 +30,7 @@ set Safetensors_dir=“${MODELS_DIR}/Stable-Diffusion}
 set Lora_dir=“${MODELS_DIR}/Lora”
 set ESRGAN_dir=“${MODELS_DIR}/ESRGAN”
 
-cd ${ckpt_dir}
+cd ${Safetensors_dir}
 install git lfs
 wget https://huggingface.co/stabilityai/sdxl-turbo/blob/main/sd_xl_turbo_1.0.safetensors
 git clone Deliberate_v.5.safetensors https://huggingface.co/XpucT/Deliberate/blob/main/Deliberate_v5.safetensors
@@ -55,7 +50,7 @@ curl -O 4xNomos8kDAT.pth https://drive.usercontent.google.com/download?id=1JRwXY
 curl -O 4xLSDIRplus.pth https://github.com/Phhofm/models/blob/main/4xLSDIRplus/4xLSDIRplus.pth
 curl -0 BSRGAN https://github.com/cszn/KAIR/releases/download/v1.0/BSRGAN.pth
 
-cd ${lora_dir}
+cd ${Lora_dir}
 curl -O weird_lanscape.safetensors https://civitai.com/api/download/models/309330?type=Model&format=SafeTensor
 curl -O sheet_of_acid.safetensors https://civitai.com/api/download/models/145277?type=Model&format=SafeTensor
 curl -O gonzo.safetensors https://civitai.com/api/download/models/127015?type=Model&format=SafeTensor
