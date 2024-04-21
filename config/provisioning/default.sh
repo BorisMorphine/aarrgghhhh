@@ -6,7 +6,7 @@
 
 ### Edit the following arrays to suit your workflow - values must be quoted and separated by newlines or spaces.
 
-DISK_GB_REQUIRED=90
+DISK_GB_REQUIRED=50
 
 MAMBA_PACKAGES=(
     #"package1"
@@ -62,16 +62,8 @@ ESRGAN_MODELS=(
     "https://huggingface.co/Akumetsu971/SD_Anime_Futuristic_Armor/resolve/main/4x_NMKD-Siax_200k.pth"
     "https://huggingface.co/uwg/upscaler/resolve/main/ESRGAN/4x-UltraSharp.pth"
     "https://objectstorage.us-phoenix-1.oraclecloud.com/n/ax6ygfvpvzka/b/open-modeldb-files/o/16x-ESRGAN.pth"
-    "https://drive.usercontent.google.com/download?id=1JRwXYeuMBIsyeNfsTfeSs7gsHqCZD7x"
     "https://github.com/Phhofm/models/blob/main/4xLSDIRplus/4xLSDIRplus.pth"
     "https://github.com/cszn/KAIR/releases/download/v1.0/BSRGAN.pth"
-    "https://mega.nz/folder/qZRBmaIY#nIG8KyWFcGNTuMX_XNbJ_g/file/KBJRBQyR"
-    "https://mega.nz/folder/qZRBmaIY#nIG8KyWFcGNTuMX_XNbJ_g/file/PIRDEYgT"
-    "https://mega.nz/folder/yg0lHQoJ#sP8_BfDk2YlshFjOL9Qrtg/file/TlkHjITR"
-    "https://mega.nz/folder/yg0lHQoJ#sP8_BfDk2YlshFjOL9Qrtg/file/KxkVEaAQ"
-    "https://mega.nz/folder/yg0lHQoJ#sP8_BfDk2YlshFjOL9Qrtg/file/H49nEAzI"
-    "https://drive.google.com/uc?export=download&confirm=1&id=1H4KQyhcknOoExjvDdsoxAgTBMO7JuJ3w"
-    "https://icedrive.net/1/43GNBihZyi"
 )
 
 CONTROLNET_MODELS=(
@@ -96,11 +88,8 @@ CONTROLNET_MODELS=(
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
 
 function provisioning_clone_or_update_repos() {
-    local webui_git="https://github.com/AUTOMATIC1111/stable-diffusion-webui"
-    local forgeRepoURL="https://github.com/lllyasviel/stable-diffusion-webui-forge.git"
-    
+    local webui_git="https://github.com/lllyasviel/stable-diffusion-webui-forge.git"    
     local webui_dir="/opt/stable-diffusion-webui"
-    local forgeRepoPath="/opt/stable-diffusion-webui-forge"
     
     # Clone or update stable-diffusion-webui
     if [ ! -d "$webui_dir" ]; then
@@ -109,15 +98,6 @@ function provisioning_clone_or_update_repos() {
     else
         echo "Updating stable-diffusion-webui..."
         (cd "$webui_dir" && git pull)
-    fi
-
-    # Clone or update stable-diffusion-webui-forge
-    if [ ! -d "$forgeRepoPath" ]; then
-        echo "Cloning stable-diffusion-webui-forge..."
-        git clone "$forgeRepoURL" "$forgeRepoPath"
-    else
-        echo "Updating stable-diffusion-webui-forge..."
-        (cd "$forgeRepoPath" && git pull)
     fi
 }
 
