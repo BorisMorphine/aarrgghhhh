@@ -13,6 +13,7 @@ PYTHON_PACKAGES=(
 NODES=(
     "https://huggingface.co/guoyww/animatediff"
     "https://huggingface.co/CiaraRowles/TemporalDiff"
+    "git clone https://huggingface.co/manshoety/beta_testing_models"
     "https://github.com/ltdrdata/ComfyUI-Manager"
     "https://github.com/ltdrdata/ComfyUI-Impact-Pack"
     "https://github.com/Stability-AI/ComfyUI-SAI_API"
