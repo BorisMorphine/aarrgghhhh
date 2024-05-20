@@ -27,7 +27,6 @@ NODES=(
     "https://github.com/Fannovel16/comfyui_controlnet_aux"
     "https://github.com/jags111/efficiency-nodes-comfyui"
     "https://github.com/FizzleDorf/ComfyUI_FizzNodes"
-    "https://github.com/cubiq/ComfyUI_IPAdapter_plus"
     "https://github.com/Kosinkadink/ComfyUI-Advanced-ControlNet"
     "https://github.com/Kosinkadink/ComfyUI-AnimateDiff-Evolved"
     "https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite"
