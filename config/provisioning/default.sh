@@ -12,9 +12,17 @@ PYTHON_PACKAGES=(
 
 NODES=(
     "https://github.com/ltdrdata/ComfyUI-Manager"
+    "https://civitai.com/api/download/models/505022?type=Archive&format=Other"
+    "https://civitai.com/api/download/models/469548?type=Archive&format=Other"
+    "https://civitai.com/api/download/models/411102?type=Archive&format=Other"
+    "https://civitai.com/api/download/models/194582?type=Archive&format=Other"
+    "https://civitai.com/api/download/models/167432?type=Archive&format=Other"
+    "https://civitai.com/api/download/models/298254?type=Archive&format=Other"
 )
 
 CHECKPOINT_MODELS=(
+    "https://huggingface.co/ByteDance/Hyper-SD/resolve/main/Hyper-SDXL-1step-Unet-Comfyui.fp16.safetensors"
+    "https://huggingface.co/ByteDance/Hyper-SD/resolve/main/Hyper-SDXL-1step-Unet.safetensors"
     "https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.ckpt"
     "https://huggingface.co/stabilityai/stable-diffusion-2-1/resolve/main/v2-1_768-ema-pruned.ckpt"
     "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors"
@@ -25,6 +33,7 @@ CHECKPOINT_MODELS=(
 
 LORA_MODELS=(
     "https://civitai.com/api/download/models/16576"
+    "https://huggingface.co/ByteDance/Hyper-SD/resolve/main/Hyper-SDXL-1step-lora.safetensors"
 )
 
 VAE_MODELS=(
