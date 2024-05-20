@@ -12,12 +12,22 @@ PYTHON_PACKAGES=(
 
 NODES=(
     "https://github.com/ltdrdata/ComfyUI-Manager"
-    "https://civitai.com/api/download/models/505022?type=Archive&format=Other"
-    "https://civitai.com/api/download/models/469548?type=Archive&format=Other"
-    "https://civitai.com/api/download/models/411102?type=Archive&format=Other"
-    "https://civitai.com/api/download/models/194582?type=Archive&format=Other"
-    "https://civitai.com/api/download/models/167432?type=Archive&format=Other"
-    "https://civitai.com/api/download/models/298254?type=Archive&format=Other"
+    "https://github.com/ltdrdata/ComfyUI-Impact-Pack"
+    "https://github.com/Stability-AI/ComfyUI-SAI_API"
+    "https://github.com/omar92/ComfyUI-QualityOfLifeSuit_Omar92"
+    "https://github.com/Nourepide/ComfyUI-Allor"
+    "https://github.com/rgthree/rgthree-comfy"
+    "https://github.com/cubiq/ComfyUI_essentials"
+    "https://github.com/Fannovel16/comfyui_controlnet_aux"
+    "https://github.com/jags111/efficiency-nodes-comfyui"
+    "https://github.com/FizzleDorf/ComfyUI_FizzNodes"
+    "https://github.com/cubiq/ComfyUI_IPAdapter_plus"
+    "https://github.com/Kosinkadink/ComfyUI-Advanced-ControlNet"
+    "https://github.com/Kosinkadink/ComfyUI-AnimateDiff-Evolved"
+    "https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite"
+    "https://github.com/Gourieff/comfyui-reactor-node"
+    "https://github.com/mav-rik/facerestore_cf"
+    "https://github.com/LykosAI/ComfyUI-Inference-Core-Nodes"
 )
 
 CHECKPOINT_MODELS=(
