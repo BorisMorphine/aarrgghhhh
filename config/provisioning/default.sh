@@ -11,9 +11,12 @@ PYTHON_PACKAGES=(
 )
 
 NODES=(
+    "https://huggingface.co/guoyww/animatediff"
     "https://github.com/ltdrdata/ComfyUI-Manager"
     "https://github.com/ltdrdata/ComfyUI-Impact-Pack"
     "https://github.com/Stability-AI/ComfyUI-SAI_API"
+    "https://github.com/ArtVentureX/comfyui-animatediff"
+    "https://github.com/Kosinkadink/ComfyUI-AnimateDiff-Evolved"
     "https://github.com/omar92/ComfyUI-QualityOfLifeSuit_Omar92"
     "https://github.com/Nourepide/ComfyUI-Allor"
     "https://github.com/rgthree/rgthree-comfy"
