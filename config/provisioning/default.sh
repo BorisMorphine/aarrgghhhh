@@ -11,6 +11,7 @@ PYTHON_PACKAGES=(
 )
 
 NODES=(
+    "https://github.com/cubiq/ComfyUI_IPAdapter_plus"
     "https://huggingface.co/guoyww/animatediff"
     "https://huggingface.co/CiaraRowles/TemporalDiff"
     "git clone https://huggingface.co/manshoety/beta_testing_models"
