@@ -87,6 +87,7 @@ CONTROLNET_MODELS=(
 
 cd /workspace/ComfyUI/custom_nodes/ComfyUI_IPAdapter_plus/models
 git clone https://huggingface.co/h94/IP-Adapter-FaceID
+git clone https://github.com/tencent-ailab/IP-Adapter.git
 
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
 
