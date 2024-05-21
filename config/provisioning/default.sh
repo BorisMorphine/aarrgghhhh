@@ -86,7 +86,7 @@ CONTROLNET_MODELS=(
 )
 
 cd /workspace/ComfyUI/custom_nodes/ComfyUI_IPAdapter_plus/models
-git clone https://huggingface.co/h94/IP-Adapter/resolve/main/models/image_encoder/model.safetensors image_encoder.safetensors
+git clone https://huggingface.co/h94/IP-Adapter-FaceID
 
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
 
