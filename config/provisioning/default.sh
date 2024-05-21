@@ -33,6 +33,7 @@ NODES=(
     "https://github.com/Gourieff/comfyui-reactor-node"
     "https://github.com/mav-rik/facerestore_cf"
     "https://github.com/LykosAI/ComfyUI-Inference-Core-Nodes"
+    "https://huggingface.co/h94/IP-Adapter"
 )
 
 CHECKPOINT_MODELS=(
