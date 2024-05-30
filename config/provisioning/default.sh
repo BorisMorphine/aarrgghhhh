@@ -26,6 +26,7 @@ NODES=(
     "https://github.com/Kosinkadink/ComfyUI-AnimateDiff-Evolved"
     "https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite"
     "https://github.com/LonicaMewinsky/ComfyUI-MakeFrame"
+    "https://github.com/Fannovel16/ComfyUI-Frame-Interpolation"
     "https://github.com/ltdrdata/ComfyUI-Impact-Pack"
     "https://github.com/ltdrdata/ComfyUI-Manager"
     "https://github.com/LykosAI/ComfyUI-Inference-Core-Nodes"
