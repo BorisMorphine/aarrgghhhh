@@ -96,7 +96,19 @@ CONTROLNET_MODELS=(
     "https://huggingface.co/TencentARC/t2i-adapter-depth-midas-sdxl-1.0/resolve/main/diffusion_pytorch_model.safetensors"
 )
 
+# Check if the directory exists
+if [ ! -d "/workspace/ComfyUI/custom_nodes/ComfyUI_IPAdapter_plus/models" ]; then
+    # Create the directory
+    mkdir -p /workspace/ComfyUI/custom_nodes/ComfyUI_IPAdapter_plus/models
+    echo "Directory created."
+else
+    echo "Directory already exists."
+fi
+
+# Navigate to the directory
 cd /workspace/ComfyUI/custom_nodes/ComfyUI_IPAdapter_plus/models
+
+# Clone the repositories
 git clone https://huggingface.co/h94/IP-Adapter-FaceID
 git clone https://github.com/tencent-ailab/IP-Adapter.git
 
