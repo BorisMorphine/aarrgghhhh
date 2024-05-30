@@ -42,6 +42,7 @@ NODES=(
     "https://huggingface.co/guoyww/animatediff"
     "https://huggingface.co/h94/IP-Adapter"
     "https://huggingface.co/manshoety/beta_testing_models"
+    "https://github.com/tinyterra/ComfyUI_tinyterraNodes"
 )
 
 CHECKPOINT_MODELS=(
