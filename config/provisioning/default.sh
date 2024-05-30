@@ -55,11 +55,14 @@ CHECKPOINT_MODELS=(
     "https://civitai.com/api/download/models/498484"
     "https://civitai.com/api/download/models/489217"
     "https://civitai.com/api/download/models/520858"
+    "https://civitai.com/api/download/models/532842?type=Model&format=SafeTensor&size=full&fp=fp16"
 )
 
 LORA_MODELS=(
     "https://civitai.com/api/download/models/16576"
     "https://huggingface.co/ByteDance/Hyper-SD/resolve/main/Hyper-SDXL-1step-lora.safetensors"
+    "https://civitai.com/api/download/models/519148"
+    "https://civitai.com/api/download/models/516211?type=Model&format=SafeTensor"
 )
 
 VAE_MODELS=(
