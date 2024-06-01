@@ -38,12 +38,16 @@ CHECKPOINT_MODELS=(
     "https://civitai.com/api/download/models/501240?type=Model&format=SafeTensor&size=full&fp=fp16"
     "https://civitai.com/api/download/models/245598?type=Model&format=SafeTensor&size=full&fp=fp16"
     "https://civitai.com/api/download/models/245627?type=Model&format=SafeTensor&size=full&fp=fp16"
+    "https://civitai.com/api/download/models/72396?type=Model&format=SafeTensor&size=full&fp=fp16"
+    "https://civitai.com/api/download/models/471120?type=Model&format=SafeTensor&size=full&fp=fp16"
+    "https://civitai.com/api/download/models/242179?type=Model&format=SafeTensor"
     "https://huggingface.co/XpucT/Deliberate/resolve/main/Deliberate_v6.safetensors"
     "https://huggingface.co/XpucT/Deliberate/resolve/main/Deliberate_v6-inpainting.safetensors"
 )
 
 LORA_MODELS=(
     "https://civitai.com/api/download/models/16576"
+    "https://civitai.com/api/download/models/445042?type=Model&format=SafeTensor"
 )
 
 VAE_MODELS=(
@@ -95,6 +99,12 @@ wget -O realistic--neg.pt -q https://civitai.com/api/download/models/42247?type=
 
 # Download Deliberate Negative
 wget -O deliberate--neg.pt -q https://civitai.com/api/download/models/36426?type=Negative&format=Other
+
+# Download Detail ++
+wget -O detailplusplus.pt -q https://civitai.com/api/download/models/539032?type=Model&format=SafeTensor
+
+
+https://civitai.com/api/download/models/20387?type=Training%20Data
 
 # Renaming Extensions
 mv workspace/stable-diffusion-webui/extensions/sd-forge-deforum workspace/stable-diffusion-webui/extensions/deforum
