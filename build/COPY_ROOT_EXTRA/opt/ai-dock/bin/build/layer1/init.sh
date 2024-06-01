@@ -6,7 +6,7 @@
 
 ### Edit the following arrays to suit your workflow - values must be quoted and separated by newlines or spaces.
 
-DISK_GB_REQUIRED=30
+DISK_GB_REQUIRED=60
 
 # Download and prepare the replacement files
 git clone https://github.com/lllyasviel/stable-diffusion-webui-forge /tmp/stable-diffusion-webui-forge/
@@ -147,7 +147,6 @@ wget -O v2_lora_RollingAntiClockwise.ckpt -q https://github.com/guoyww/AnimateDi
 
 # Downloading AnimateDiff-LCM Motion Model
 wget -O AnimateDiff-LCM_Motion_Model.pt -q https://civitai.com/api/download/models/366178?type=Model&format=PickleTensor&size=full&fp=fp32
-
 
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
 
