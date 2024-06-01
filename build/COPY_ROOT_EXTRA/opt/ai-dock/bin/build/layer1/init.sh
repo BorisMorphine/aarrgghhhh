@@ -12,7 +12,6 @@ DISK_GB_REQUIRED=30
 git clone https://github.com/lllyasviel/stable-diffusion-webui-forge /tmp/stable-diffusion-webui-forge/
 rsync -avzh /tmp/stable-diffusion-webui-forge/ /workspace/stable-diffusion-webui/
 
-
 MAMBA_PACKAGES=(
     "package1"
     "package2=version"
@@ -34,6 +33,8 @@ CHECKPOINT_MODELS=(
     "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors"
     "https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0.safetensors"
     "https://civitai.com/api/download/models/396524?type=Model&format=SafeTensor&size=pruned&fp=fp16"
+    "https://civitai.com/api/download/models/537505?type=Model&format=SafeTensor&size=pruned&fp=fp32"
+    "https://civitai.com/api/download/models/495292?type=Model&format=SafeTensor&size=full&fp=fp32"
 )
 
 LORA_MODELS=(
@@ -71,6 +72,18 @@ wget -O Img2Vid.safetensors -q https://civitai.com/api/download/models/234212?ty
 wget -O Img2Vid-xt.safetensors -q https://civitai.com/api/download/models/234202?type=Model&format=SafeTensor&size=full&fp=fp32
 
 ###
+
+# Navigate to embeddings Folder
+cd /workspace/stable-diffusion-webui/embeddings
+
+# Downloading CyberRealistic Negative
+wget -O cyber--neg.pt -q https://civitai.com/api/download/models/82745?type=Negative&format=Other
+
+# Downloading SoftRealistic Negative
+wget -O soft--neg.pt -q https://civitai.com/api/download/models/396717?type=Model&format=PickleTensor
+
+# Downloading SoftRealistic Positive
+wget -O soft--good.pt -q https://civitai.com/api/download/models/399643?type=Model&format=PickleTensor
 
 # Renaming Extensions
 mv workspace/stable-diffusion-webui/extensions/sd-forge-deforum workspace/stable-diffusion-webui/extensions/deforum
@@ -128,8 +141,6 @@ wget -O v2_lora_RollingAntiClockwise.ckpt -q https://github.com/guoyww/AnimateDi
 
 # Downloading AnimateDiff-LCM Motion Model
 wget -O AnimateDiff-LCM_Motion_Model.pt -q https://civitai.com/api/download/models/366178?type=Model&format=PickleTensor&size=full&fp=fp32
-
-
 
 
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
