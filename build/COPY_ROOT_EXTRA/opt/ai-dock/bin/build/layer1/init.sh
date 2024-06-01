@@ -23,29 +23,17 @@ PIP_PACKAGES=(
   )
 
 EXTENSIONS=(
-    "https://github.com/Mikubill/sd-webui-controlnet"
-    "https://github.com/d8ahazard/sd_dreambooth_extension"
-    "https://github.com/deforum-art/sd-webui-deforum"
-    "https://github.com/adieyal/sd-dynamic-prompts"
-    "https://github.com/ototadana/sd-face-editor"
-    "https://github.com/AlUlkesh/stable-diffusion-webui-images-browser"
-    "https://github.com/hako-mikan/sd-webui-regional-prompter"
-    "https://github.com/Coyote-A/ultimate-upscale-for-automatic1111"
-    "https://github.com/fkunn1326/openpose-editor"
-    "https://github.com/Gourieff/sd-webui-reactor"
-    "https://github.com/ibrahimsn98/sdwebui-kotlin"
-    "https://github.com/andyjsharpe/Automatic1111Interpolator"
-    "https://github.com/zer0TF/deforum-prompt-interpolator"
-    "https://github.com/lllyasviel/stable-diffusion-webui-forge"
-    "https://github.com/s9roll7/sd_loopback_music_sync_wave"
     "https://github.com/lllyasviel/ControlNet-v1-1-nightly"
+    "https://github.com/continue-revolution/sd-forge-animatediff"
+    "https://github.com/deforum-art/sd-forge-deforum"
 )
 
 CHECKPOINT_MODELS=(
     "https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.ckpt"
-    #"https://huggingface.co/stabilityai/stable-diffusion-2-1/resolve/main/v2-1_768-ema-pruned.ckpt"
-    #"https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors"
-    #"https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0.safetensors"
+    "https://huggingface.co/stabilityai/stable-diffusion-2-1/resolve/main/v2-1_768-ema-pruned.ckpt"
+    "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors"
+    "https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0.safetensors"
+    "https://civitai.com/api/download/models/396524?type=Model&format=SafeTensor&size=pruned&fp=fp16"
 )
 
 LORA_MODELS=(
@@ -64,24 +52,75 @@ ESRGAN_MODELS=(
     "https://huggingface.co/Akumetsu971/SD_Anime_Futuristic_Armor/resolve/main/4x_NMKD-Siax_200k.pth"
 )
 
-CONTROLNET_MODELS=(
-    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_canny-fp16.safetensors"
-    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_depth-fp16.safetensors"
-    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_hed-fp16.safetensors"
-    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_mlsd-fp16.safetensors"
-    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_normal-fp16.safetensors"
-    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_openpose-fp16.safetensors"
-    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_scribble-fp16.safetensors"
-    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_seg-fp16.safetensors"
-    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_canny-fp16.safetensors"
-    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_color-fp16.safetensors"
-    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_depth-fp16.safetensors"
-    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_keypose-fp16.safetensors"
-    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_openpose-fp16.safetensors"
-    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_seg-fp16.safetensors"
-    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_sketch-fp16.safetensors"
-    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_style-fp16.safetensors"
-)
+CONTROLNET_MODELS=()
+
+# Navigate to SVD Folder
+cd /workspace/stable-diffusion-webui/models/svd/
+
+# Downloading img2vid-xt-1.1
+wget -O img2vid-xt-1.1.safetensors -q https://civitai.com/api/download/models/329995?type=Model&format=SafeTensor&size=pruned&fp=fp16
+
+# Downloading Img2Vid
+wget -O Img2Vid.safetensors -q https://civitai.com/api/download/models/234212?type=Model&format=SafeTensor&size=full&fp=fp32
+
+# Downloading Img2Vid-xt
+wget -O Img2Vid-xt.safetensors -q https://civitai.com/api/download/models/234202?type=Model&format=SafeTensor&size=full&fp=fp32
+
+###
+
+# Install Deforum
+cd workspace/stable-diffusion-webui/extensions/sd-forge-deforum
+pip install -r requirements.txt
+
+###
+
+# Navigate to sd-forge-animatediff folder
+cd /workspace/stable-diffusion-webui/extensions/sd-forge-animatediff/models
+
+# Downloading v3_adapter_sd_v15
+wget -O v3_adapter_sd_v15.ckpt -q 
+
+# Downloading v3_sd15_mm
+wget -O v3_sd15_mm.ckpt.ckpt -q 
+
+# Downloading v3_sd15_sparsectrl_scribble
+wget -O v3_sd15_sparsectrl_scribble.ckpt -q 
+
+# Downloading v3_sd15_sparsectrl_rgb
+wget -O v3_sd15_sparsectrl_rgb.ckpt -q 
+
+# Downloading mm_sdxl_v10_beta
+wget -O mm_sdxl_v10_beta.ckpt -q 
+
+# Downloading mm_sd_v15_v2
+wget -O mm_sd_v15_v2.ckpt -q 
+
+# Downloading v2_lora_ZoomIn
+wget -O v2_lora_ZoomIn.ckpt -q 
+
+# Downloading v2_lora_ZoomOut
+wget -O v2_lora_ZoomOut.ckpt -q 
+
+# Downloading v2_lora_PanLeft
+wget -O v2_lora_PanLeft.ckpt -q 
+
+# Downloading v2_lora_PanRight
+wget -O v2_lora_PanRight.ckpt -q 
+
+# Downloading v2_lora_TiltUp
+wget -O v2_lora_TiltUp.ckpt -q 
+
+# Downloading v2_lora_TiltDown
+wget -O v2_lora_TiltDown.ckpt -q 
+
+# Downloading v2_lora_RollingClockwise
+wget -O v2_lora_RollingClockwise.ckpt -q 
+
+# Downloading v2_lora_RollingAntiClockwise
+wget -O v2_lora_RollingAntiClockwise.ckpt -q 
+
+
+
 
 
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
