@@ -52,7 +52,11 @@ ESRGAN_MODELS=(
     "https://huggingface.co/Akumetsu971/SD_Anime_Futuristic_Armor/resolve/main/4x_NMKD-Siax_200k.pth"
 )
 
-CONTROLNET_MODELS=()
+CONTROLNET_MODELS=(
+    "https://huggingface.co/crishhh/animatediff_controlnet/resolve/main/controlnet_checkpoint.ckpt"
+    "https://huggingface.co/crishhh/animatediff_controlnet/resolve/main/motion_checkpoint_less_motion.ckpt"
+    "https://huggingface.co/crishhh/animatediff_controlnet/resolve/main/motion_checkpoint_more_motion.ckpt"
+)
 
 # Navigate to SVD Folder
 cd /workspace/stable-diffusion-webui/models/svd/
@@ -68,57 +72,62 @@ wget -O Img2Vid-xt.safetensors -q https://civitai.com/api/download/models/234202
 
 ###
 
+# Renaming Extensions
+mv workspace/stable-diffusion-webui/extensions/sd-forge-deforum workspace/stable-diffusion-webui/extensions/deforum
+mv workspace/stable-diffusion-webui/extensions/ControlNet-v1-1-nightly workspace/stable-diffusion-webui/extensions/controlnet
+mv workspace/stable-diffusion-webui/extensions/sd-forge-animatediff workspace/stable-diffusion-webui/extensions/animatediff
+
 # Install Deforum
-cd workspace/stable-diffusion-webui/extensions/sd-forge-deforum
+cd workspace/stable-diffusion-webui/extensions/deforum
 pip install -r requirements.txt
 
-###
-
-# Navigate to sd-forge-animatediff folder
-cd /workspace/stable-diffusion-webui/extensions/sd-forge-animatediff/models
+# Navigate to animatediff folder and add models
+cd /workspace/stable-diffusion-webui/extensions/animatediff/models
 
 # Downloading v3_adapter_sd_v15
-wget -O v3_adapter_sd_v15.ckpt -q 
+wget -O v3_adapter_sd_v15.ckpt -q https://huggingface.co/guoyww/animatediff/blob/main/v3_sd15_adapter.ckpt
 
 # Downloading v3_sd15_mm
-wget -O v3_sd15_mm.ckpt.ckpt -q 
+wget -O v3_sd15_mm.ckpt.ckpt -q https://github.com/guoyww/AnimateDiff?tab=readme-ov-file#setup-for-inference:~:text=v3_sd15_mm.ckpt.ckpt-,Link,-Motion%20Module
 
 # Downloading v3_sd15_sparsectrl_scribble
-wget -O v3_sd15_sparsectrl_scribble.ckpt -q 
+wget -O v3_sd15_sparsectrl_scribble.ckpt -q https://github.com/guoyww/AnimateDiff?tab=readme-ov-file#setup-for-inference:~:text=v3_sd15_mm.ckpt.ckpt-,Link,-Motion%20Module
 
 # Downloading v3_sd15_sparsectrl_rgb
-wget -O v3_sd15_sparsectrl_rgb.ckpt -q 
+wget -O v3_sd15_sparsectrl_rgb.ckpt -q https://huggingface.co/guoyww/animatediff/blob/main/v3_sd15_sparsectrl_scribble.ckpt
 
 # Downloading mm_sdxl_v10_beta
-wget -O mm_sdxl_v10_beta.ckpt -q 
+wget -O mm_sdxl_v10_beta.ckpt -q https://huggingface.co/guoyww/animatediff/blob/main/v3_sd15_sparsectrl_rgb.ckpt
 
 # Downloading mm_sd_v15_v2
-wget -O mm_sd_v15_v2.ckpt -q 
+wget -O mm_sd_v15_v2.ckpt -q https://github.com/guoyww/AnimateDiff?tab=readme-ov-file#setup-for-inference:~:text=mm_sd_v15_v2.ckpt-,Link,-Motion%20Module
 
 # Downloading v2_lora_ZoomIn
-wget -O v2_lora_ZoomIn.ckpt -q 
+wget -O v2_lora_ZoomIn.ckpt -q https://github.com/guoyww/AnimateDiff?tab=readme-ov-file#setup-for-inference:~:text=v2_lora_ZoomIn.ckpt-,Link,-MotionLoRA
 
 # Downloading v2_lora_ZoomOut
-wget -O v2_lora_ZoomOut.ckpt -q 
+wget -O v2_lora_ZoomOut.ckpt -q https://github.com/guoyww/AnimateDiff?tab=readme-ov-file#setup-for-inference:~:text=v2_lora_ZoomOut.ckpt-,Link,-MotionLoRA
 
 # Downloading v2_lora_PanLeft
-wget -O v2_lora_PanLeft.ckpt -q 
+wget -O v2_lora_PanLeft.ckpt -q https://github.com/guoyww/AnimateDiff?tab=readme-ov-file#setup-for-inference:~:text=v2_lora_PanLeft.ckpt-,Link,-MotionLoRA
 
 # Downloading v2_lora_PanRight
-wget -O v2_lora_PanRight.ckpt -q 
+wget -O v2_lora_PanRight.ckpt -q https://github.com/guoyww/AnimateDiff?tab=readme-ov-file#setup-for-inference:~:text=v2_lora_PanRight.ckpt-,Link,-MotionLoRA
 
 # Downloading v2_lora_TiltUp
-wget -O v2_lora_TiltUp.ckpt -q 
+wget -O v2_lora_TiltUp.ckpt -q https://github.com/guoyww/AnimateDiff?tab=readme-ov-file#setup-for-inference:~:text=v2_lora_TiltUp.ckpt-,Link,-MotionLoRA
 
 # Downloading v2_lora_TiltDown
-wget -O v2_lora_TiltDown.ckpt -q 
+wget -O v2_lora_TiltDown.ckpt -q https://github.com/guoyww/AnimateDiff?tab=readme-ov-file#setup-for-inference:~:text=v2_lora_TiltDown.ckpt-,Link,-MotionLoRA
 
 # Downloading v2_lora_RollingClockwise
-wget -O v2_lora_RollingClockwise.ckpt -q 
+wget -O v2_lora_RollingClockwise.ckpt -q https://github.com/guoyww/AnimateDiff?tab=readme-ov-file#setup-for-inference:~:text=v2_lora_RollingClockwise.ckpt-,Link,-MotionLoRA
 
 # Downloading v2_lora_RollingAntiClockwise
-wget -O v2_lora_RollingAntiClockwise.ckpt -q 
+wget -O v2_lora_RollingAntiClockwise.ckpt -q https://github.com/guoyww/AnimateDiff?tab=readme-ov-file#setup-for-inference:~:text=v2_lora_RollingAnticlockwise.ckpt-,Link,-MotionLoRA
 
+# Downloading AnimateDiff-LCM Motion Model
+wget -O AnimateDiff-LCM_Motion_Model.pt -q https://civitai.com/api/download/models/366178?type=Model&format=PickleTensor&size=full&fp=fp32
 
 
 
