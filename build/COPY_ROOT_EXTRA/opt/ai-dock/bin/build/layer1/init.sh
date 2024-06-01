@@ -38,6 +38,8 @@ CHECKPOINT_MODELS=(
     "https://civitai.com/api/download/models/501240?type=Model&format=SafeTensor&size=full&fp=fp16"
     "https://civitai.com/api/download/models/245598?type=Model&format=SafeTensor&size=full&fp=fp16"
     "https://civitai.com/api/download/models/245627?type=Model&format=SafeTensor&size=full&fp=fp16"
+    "https://huggingface.co/XpucT/Deliberate/resolve/main/Deliberate_v6.safetensors"
+    "https://huggingface.co/XpucT/Deliberate/resolve/main/Deliberate_v6-inpainting.safetensors"
 )
 
 LORA_MODELS=(
@@ -90,6 +92,9 @@ wget -O cyber--neg.pt -q https://civitai.com/api/download/models/82745?type=Nega
 
 #Downloading RealisticVision Negative
 wget -O realistic--neg.pt -q https://civitai.com/api/download/models/42247?type=Model&format=Other
+
+# Download Deliberate Negative
+wget -O deliberate--neg.pt -q https://civitai.com/api/download/models/36426?type=Negative&format=Other
 
 # Renaming Extensions
 mv workspace/stable-diffusion-webui/extensions/sd-forge-deforum workspace/stable-diffusion-webui/extensions/deforum
