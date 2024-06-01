@@ -1,4 +1,5 @@
-cd /opt/
+#!/bin/bash
+
 micromamba deactivate activate base
 sudo micromamba run -n webui git clone https://github.com/lllyasviel/stable-diffusion-webui-forge.git
 
