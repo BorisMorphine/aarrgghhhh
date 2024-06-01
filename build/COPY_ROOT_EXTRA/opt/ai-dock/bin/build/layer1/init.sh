@@ -35,6 +35,9 @@ CHECKPOINT_MODELS=(
     "https://civitai.com/api/download/models/396524?type=Model&format=SafeTensor&size=pruned&fp=fp16"
     "https://civitai.com/api/download/models/537505?type=Model&format=SafeTensor&size=pruned&fp=fp32"
     "https://civitai.com/api/download/models/495292?type=Model&format=SafeTensor&size=full&fp=fp32"
+    "https://civitai.com/api/download/models/501240?type=Model&format=SafeTensor&size=full&fp=fp16"
+    "https://civitai.com/api/download/models/245598?type=Model&format=SafeTensor&size=full&fp=fp16"
+    "https://civitai.com/api/download/models/245627?type=Model&format=SafeTensor&size=full&fp=fp16"
 )
 
 LORA_MODELS=(
@@ -76,14 +79,17 @@ wget -O Img2Vid-xt.safetensors -q https://civitai.com/api/download/models/234202
 # Navigate to embeddings Folder
 cd /workspace/stable-diffusion-webui/embeddings
 
-# Downloading CyberRealistic Negative
-wget -O cyber--neg.pt -q https://civitai.com/api/download/models/82745?type=Negative&format=Other
+# Downloading SoftRealistic Positive
+wget -O soft--good.pt -q https://civitai.com/api/download/models/399643?type=Model&format=PickleTensor
 
 # Downloading SoftRealistic Negative
 wget -O soft--neg.pt -q https://civitai.com/api/download/models/396717?type=Model&format=PickleTensor
 
-# Downloading SoftRealistic Positive
-wget -O soft--good.pt -q https://civitai.com/api/download/models/399643?type=Model&format=PickleTensor
+# Downloading CyberRealistic Negative
+wget -O cyber--neg.pt -q https://civitai.com/api/download/models/82745?type=Negative&format=Other
+
+#Downloading RealisticVision Negative
+wget -O realistic--neg.pt -q https://civitai.com/api/download/models/42247?type=Model&format=Other
 
 # Renaming Extensions
 mv workspace/stable-diffusion-webui/extensions/sd-forge-deforum workspace/stable-diffusion-webui/extensions/deforum
