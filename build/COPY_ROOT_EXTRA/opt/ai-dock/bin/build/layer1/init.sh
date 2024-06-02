@@ -15,7 +15,10 @@ rsync -avzh /tmp/stable-diffusion-webui-forge/ /workspace/stable-diffusion-webui
 MAMBA_PACKAGES=(
     "package1"
     "package2=version"
-    
+  )
+  
+PIP_PACKAGES=(
+    "bitsandbytes==0.41.2.post2"
     "basicsr==1.4.2" 
     "imageio_ffmpeg" 
     "av" 
@@ -26,10 +29,6 @@ MAMBA_PACKAGES=(
     "ezsynth" 
     "ffmpeg" 
     "onnxruntime"
-  )
-  
-PIP_PACKAGES=(
-    "bitsandbytes==0.41.2.post2"
   )
 
 EXTENSIONS=(
@@ -73,7 +72,6 @@ CHECKPOINT_MODELS=(
     "https://civitai.com/api/download/models/245627?type=Model&format=SafeTensor&size=full&fp=fp16"
     "https://civitai.com/api/download/models/351306?type=Model&format=SafeTensor&size=full&fp=fp16"
     "https://civitai.com/api/download/models/72396?type=Model&format=SafeTensor&size=full&fp=fp16"
-
 )
 
 LORA_MODELS=(
