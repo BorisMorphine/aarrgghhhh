@@ -6,7 +6,7 @@
 
 ### Edit the following arrays to suit your workflow - values must be quoted and separated by newlines or spaces.
 
-DISK_GB_REQUIRED=60
+DISK_GB_REQUIRED=400
 
 # Download and prepare the replacement files
 git clone https://github.com/lllyasviel/stable-diffusion-webui-forge /tmp/stable-diffusion-webui-forge/
@@ -28,26 +28,40 @@ EXTENSIONS=(
 )
 
 CHECKPOINT_MODELS=(
-    "https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.ckpt"
-    "https://huggingface.co/stabilityai/stable-diffusion-2-1/resolve/main/v2-1_768-ema-pruned.ckpt"
-    "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors"
     "https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0.safetensors"
-    "https://civitai.com/api/download/models/396524?type=Model&format=SafeTensor&size=pruned&fp=fp16"
-    "https://civitai.com/api/download/models/537505?type=Model&format=SafeTensor&size=pruned&fp=fp32"
-    "https://civitai.com/api/download/models/495292?type=Model&format=SafeTensor&size=full&fp=fp32"
-    "https://civitai.com/api/download/models/501240?type=Model&format=SafeTensor&size=full&fp=fp16"
-    "https://civitai.com/api/download/models/245598?type=Model&format=SafeTensor&size=full&fp=fp16"
-    "https://civitai.com/api/download/models/245627?type=Model&format=SafeTensor&size=full&fp=fp16"
-    "https://civitai.com/api/download/models/72396?type=Model&format=SafeTensor&size=full&fp=fp16"
-    "https://civitai.com/api/download/models/471120?type=Model&format=SafeTensor&size=full&fp=fp16"
-    "https://civitai.com/api/download/models/242179?type=Model&format=SafeTensor"
-    "https://huggingface.co/XpucT/Deliberate/resolve/main/Deliberate_v6.safetensors"
+    "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors"
+    "https://huggingface.co/stabilityai/stable-diffusion-2-1/resolve/main/v2-1_768-ema-pruned.ckpt"
+    "https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.ckpt"
     "https://huggingface.co/XpucT/Deliberate/resolve/main/Deliberate_v6-inpainting.safetensors"
+    "https://huggingface.co/XpucT/Deliberate/resolve/main/Deliberate_v6.safetensors"
+    "https://civitai.com/api/download/models/524897"
+    "https://civitai.com/api/download/models/520858"
+    "https://civitai.com/api/download/models/528769"
+    "https://civitai.com/api/download/models/356472"
+    "https://civitai.com/api/download/models/488645"
+    "https://civitai.com/api/download/models/343567"
+    "https://civitai.com/api/download/models/471120"
+    "https://civitai.com/api/download/models/536812"
+    "https://civitai.com/api/download/models/505697"
+    "https://civitai.com/api/download/models/242179"
+    "https://civitai.com/api/download/models/396524"
+    "https://civitai.com/api/download/models/537505"
+    "https://civitai.com/api/download/models/495292"
+    "https://civitai.com/api/download/models/501240"
+    "https://civitai.com/api/download/models/245598"
+    "https://civitai.com/api/download/models/245627"
+    "https://civitai.com/api/download/models/351306"
+    "https://civitai.com/api/download/models/72396"
+
 )
 
 LORA_MODELS=(
+    "https://civitai.com/api/download/models/445042"
+    "https://civitai.com/api/download/models/114163"
+    "https://civitai.com/api/download/models/161516"
+    "https://civitai.com/api/download/models/296828"
     "https://civitai.com/api/download/models/16576"
-    "https://civitai.com/api/download/models/445042?type=Model&format=SafeTensor"
+    "https://civitai.com/api/download/models/7555"
 )
 
 VAE_MODELS=(
@@ -122,46 +136,54 @@ cd /workspace/stable-diffusion-webui/extensions/animatediff/models
 wget -O v3_adapter_sd_v15.ckpt -q https://huggingface.co/guoyww/animatediff/blob/main/v3_sd15_adapter.ckpt
 
 # Downloading v3_sd15_mm
-wget -O v3_sd15_mm.ckpt.ckpt -q https://github.com/guoyww/AnimateDiff?tab=readme-ov-file#setup-for-inference:~:text=v3_sd15_mm.ckpt.ckpt-,Link,-Motion%20Module
+wget -O v3_sd15_mm.ckpt.ckpt -q https://huggingface.co/guoyww/animatediff/blob/main/v3_sd15_mm.ckpt
 
 # Downloading v3_sd15_sparsectrl_scribble
-wget -O v3_sd15_sparsectrl_scribble.ckpt -q https://github.com/guoyww/AnimateDiff?tab=readme-ov-file#setup-for-inference:~:text=v3_sd15_mm.ckpt.ckpt-,Link,-Motion%20Module
+wget -O v3_sd15_sparsectrl_scribble.ckpt -q https://huggingface.co/guoyww/animatediff/blob/main/v3_sd15_sparsectrl_scribble.ckpt
 
 # Downloading v3_sd15_sparsectrl_rgb
-wget -O v3_sd15_sparsectrl_rgb.ckpt -q https://huggingface.co/guoyww/animatediff/blob/main/v3_sd15_sparsectrl_scribble.ckpt
+wget -O v3_sd15_sparsectrl_rgb.ckpt -q https://huggingface.co/guoyww/animatediff/blob/main/v3_sd15_sparsectrl_rgb.ckpt
 
 # Downloading mm_sdxl_v10_beta
 wget -O mm_sdxl_v10_beta.ckpt -q https://huggingface.co/guoyww/animatediff/blob/main/v3_sd15_sparsectrl_rgb.ckpt
 
 # Downloading mm_sd_v15_v2
-wget -O mm_sd_v15_v2.ckpt -q https://github.com/guoyww/AnimateDiff?tab=readme-ov-file#setup-for-inference:~:text=mm_sd_v15_v2.ckpt-,Link,-Motion%20Module
+wget -O mm_sd_v15_v2.ckpt -q https://huggingface.co/guoyww/animatediff/blob/main/mm_sdxl_v10_beta.ckpt
+
+if [ ! -d "/workspace/stable-diffusion-webui/models/MotionLORA" ]; then
+  mkdir -p /workspace/stable-diffusion-webui/models/MotionLORA
+fi
+
+cd /workspace/stable-diffusion-webui/models/MotionLORA
 
 # Downloading v2_lora_ZoomIn
-wget -O v2_lora_ZoomIn.ckpt -q https://github.com/guoyww/AnimateDiff?tab=readme-ov-file#setup-for-inference:~:text=v2_lora_ZoomIn.ckpt-,Link,-MotionLoRA
+wget -O v2_lora_ZoomIn.ckpt -q https://huggingface.co/guoyww/animatediff/blob/main/mm_sd_v15_v2.ckpt
 
 # Downloading v2_lora_ZoomOut
-wget -O v2_lora_ZoomOut.ckpt -q https://github.com/guoyww/AnimateDiff?tab=readme-ov-file#setup-for-inference:~:text=v2_lora_ZoomOut.ckpt-,Link,-MotionLoRA
+wget -O v2_lora_ZoomOut.ckpt -q https://huggingface.co/guoyww/animatediff/blob/main/v2_lora_ZoomIn.ckpt
 
 # Downloading v2_lora_PanLeft
-wget -O v2_lora_PanLeft.ckpt -q https://github.com/guoyww/AnimateDiff?tab=readme-ov-file#setup-for-inference:~:text=v2_lora_PanLeft.ckpt-,Link,-MotionLoRA
+wget -O v2_lora_PanLeft.ckpt -q https://huggingface.co/guoyww/animatediff/blob/main/v2_lora_PanLeft.ckpt
 
 # Downloading v2_lora_PanRight
-wget -O v2_lora_PanRight.ckpt -q https://github.com/guoyww/AnimateDiff?tab=readme-ov-file#setup-for-inference:~:text=v2_lora_PanRight.ckpt-,Link,-MotionLoRA
+wget -O v2_lora_PanRight.ckpt -q https://huggingface.co/guoyww/animatediff/blob/main/v2_lora_PanRight.ckpt
 
 # Downloading v2_lora_TiltUp
-wget -O v2_lora_TiltUp.ckpt -q https://github.com/guoyww/AnimateDiff?tab=readme-ov-file#setup-for-inference:~:text=v2_lora_TiltUp.ckpt-,Link,-MotionLoRA
+wget -O v2_lora_TiltUp.ckpt -q https://huggingface.co/guoyww/animatediff/blob/main/v2_lora_TiltUp.ckpt
 
 # Downloading v2_lora_TiltDown
-wget -O v2_lora_TiltDown.ckpt -q https://github.com/guoyww/AnimateDiff?tab=readme-ov-file#setup-for-inference:~:text=v2_lora_TiltDown.ckpt-,Link,-MotionLoRA
+wget -O v2_lora_TiltDown.ckpt -q https://huggingface.co/guoyww/animatediff/blob/main/v2_lora_TiltDown.ckpt
 
 # Downloading v2_lora_RollingClockwise
-wget -O v2_lora_RollingClockwise.ckpt -q https://github.com/guoyww/AnimateDiff?tab=readme-ov-file#setup-for-inference:~:text=v2_lora_RollingClockwise.ckpt-,Link,-MotionLoRA
+wget -O v2_lora_RollingClockwise.ckpt -q https://huggingface.co/guoyww/animatediff/blob/main/v2_lora_RollingClockwise.ckpt
 
 # Downloading v2_lora_RollingAntiClockwise
-wget -O v2_lora_RollingAntiClockwise.ckpt -q https://github.com/guoyww/AnimateDiff?tab=readme-ov-file#setup-for-inference:~:text=v2_lora_RollingAnticlockwise.ckpt-,Link,-MotionLoRA
+wget -O v2_lora_RollingAntiClockwise.ckpt -q https://huggingface.co/guoyww/animatediff/blob/main/v2_lora_RollingAntiClockwise.ckpt
 
 # Downloading AnimateDiff-LCM Motion Model
 wget -O AnimateDiff-LCM_Motion_Model.pt -q https://civitai.com/api/download/models/366178?type=Model&format=PickleTensor&size=full&fp=fp32
+wget -O AnimateLCM-SVD-xt.pt -q https://civitai.com/api/download/models/350144?type=Model&format=SafeTensor&size=full&fp=fp32
+wget -O DragNUWA.safetensors -q https://civitai.com/api/download/models/310039?type=Model&format=SafeTensor&size=pruned&fp=fp16
 
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
 
