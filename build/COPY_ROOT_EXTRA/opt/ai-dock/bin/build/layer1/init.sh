@@ -15,6 +15,17 @@ rsync -avzh /tmp/stable-diffusion-webui-forge/ /workspace/stable-diffusion-webui
 MAMBA_PACKAGES=(
     "package1"
     "package2=version"
+    
+    "basicsr==1.4.2" 
+    "imageio_ffmpeg" 
+    "av" 
+    "moviepy" 
+    "numexpr" 
+    "mutagen" 
+    "scikit-image==0.19.2 --no-cache-dir" 
+    "ezsynth" 
+    "ffmpeg" 
+    "onnxruntime"
   )
   
 PIP_PACKAGES=(
