@@ -27,6 +27,15 @@ EXTENSIONS=(
     "https://github.com/deforum-art/sd-forge-deforum"
 )
 
+# Renaming Extensions
+mv workspace/stable-diffusion-webui/extensions/sd-forge-deforum workspace/stable-diffusion-webui/extensions/deforum
+
+# Renaming Extensions
+mv workspace/stable-diffusion-webui/extensions/ControlNet-v1-1-nightly workspace/stable-diffusion-webui/extensions/controlnet
+
+# Renaming Extensions
+mv workspace/stable-diffusion-webui/extensions/sd-forge-animatediff workspace/stable-diffusion-webui/extensions/animatediff
+
 CHECKPOINT_MODELS=(
     "https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0.safetensors"
     "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors"
@@ -86,44 +95,37 @@ CONTROLNET_MODELS=(
 cd /workspace/stable-diffusion-webui/models/svd/
 
 # Downloading img2vid-xt-1.1
-wget -O img2vid-xt-1.1.safetensors -q https://civitai.com/api/download/models/329995?type=Model&format=SafeTensor&size=pruned&fp=fp16
+wget -O img2vid-xt-1.1.safetensors -q https://civitai.com/api/download/models/329995
 
 # Downloading Img2Vid
-wget -O Img2Vid.safetensors -q https://civitai.com/api/download/models/234212?type=Model&format=SafeTensor&size=full&fp=fp32
+wget -O Img2Vid.safetensors -q https://civitai.com/api/download/models/234212
 
 # Downloading Img2Vid-xt
-wget -O Img2Vid-xt.safetensors -q https://civitai.com/api/download/models/234202?type=Model&format=SafeTensor&size=full&fp=fp32
-
-###
+wget -O Img2Vid-xt.safetensors -q https://civitai.com/api/download/models/234202
 
 # Navigate to embeddings Folder
 cd /workspace/stable-diffusion-webui/embeddings
 
 # Downloading SoftRealistic Positive
-wget -O soft--good.pt -q https://civitai.com/api/download/models/399643?type=Model&format=PickleTensor
+wget -O soft--good.pt -q https://civitai.com/api/download/models/399643
 
 # Downloading SoftRealistic Negative
-wget -O soft--neg.pt -q https://civitai.com/api/download/models/396717?type=Model&format=PickleTensor
+wget -O soft--neg.pt -q https://civitai.com/api/download/models/396717
 
 # Downloading CyberRealistic Negative
-wget -O cyber--neg.pt -q https://civitai.com/api/download/models/82745?type=Negative&format=Other
+wget -O cyber--neg.pt -q https://civitai.com/api/download/models/82745
 
 #Downloading RealisticVision Negative
-wget -O realistic--neg.pt -q https://civitai.com/api/download/models/42247?type=Model&format=Other
+wget -O realistic--neg.pt -q https://civitai.com/api/download/models/42247
 
 # Download Deliberate Negative
-wget -O deliberate--neg.pt -q https://civitai.com/api/download/models/36426?type=Negative&format=Other
+wget -O deliberate--neg.pt -q https://civitai.com/api/download/models/36426
 
 # Download Detail ++
-wget -O detailplusplus.pt -q https://civitai.com/api/download/models/539032?type=Model&format=SafeTensor
+wget -O detailplusplus.pt -q https://civitai.com/api/download/models/539032
 
 
-https://civitai.com/api/download/models/20387?type=Training%20Data
-
-# Renaming Extensions
-mv workspace/stable-diffusion-webui/extensions/sd-forge-deforum workspace/stable-diffusion-webui/extensions/deforum
-mv workspace/stable-diffusion-webui/extensions/ControlNet-v1-1-nightly workspace/stable-diffusion-webui/extensions/controlnet
-mv workspace/stable-diffusion-webui/extensions/sd-forge-animatediff workspace/stable-diffusion-webui/extensions/animatediff
+https://civitai.com/api/download/models/20387
 
 # Install Deforum
 cd workspace/stable-diffusion-webui/extensions/deforum
@@ -182,7 +184,9 @@ wget -O v2_lora_RollingAntiClockwise.ckpt -q https://huggingface.co/guoyww/anima
 
 # Downloading AnimateDiff-LCM Motion Model
 wget -O AnimateDiff-LCM_Motion_Model.pt -q https://civitai.com/api/download/models/366178?type=Model&format=PickleTensor&size=full&fp=fp32
+
 wget -O AnimateLCM-SVD-xt.pt -q https://civitai.com/api/download/models/350144?type=Model&format=SafeTensor&size=full&fp=fp32
+
 wget -O DragNUWA.safetensors -q https://civitai.com/api/download/models/310039?type=Model&format=SafeTensor&size=pruned&fp=fp16
 
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
