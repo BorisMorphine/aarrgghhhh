@@ -134,10 +134,13 @@ wget -O realistic--neg.pt -q https://civitai.com/api/download/models/42247
 wget -O deliberate--neg.pt -q https://civitai.com/api/download/models/36426
 
 # Download Detail ++
-wget -O detailplusplus.pt -q https://civitai.com/api/download/models/539032
+wget -O detail--plusplus.pt -q https://civitai.com/api/download/models/539032
 
+# Download Apocalyptic Landscape
+wget -O apocalypse--now.pt -q https://civitai.com/api/download/models/5382?type=Model&format=PickleTensor&size=full&fp=fp16
 
-https://civitai.com/api/download/models/20387
+# Download Apocalyptic Landscape
+wget -O badartist--neg.pt -q https://civitai.com/api/download/models/20387
 
 # Install Deforum
 cd workspace/stable-diffusion-webui/extensions/deforum
