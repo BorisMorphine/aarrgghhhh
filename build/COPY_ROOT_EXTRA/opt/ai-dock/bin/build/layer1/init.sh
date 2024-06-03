@@ -107,13 +107,13 @@ CONTROLNET_MODELS=(
 cd /workspace/stable-diffusion-webui/models/svd/
 
 # Downloading img2vid-xt-1.1
-wget -O img2vid-xt-1.1.safetensors -q https://civitai.com/api/download/models/329995
+wget https://civitai.com/api/download/models/329995 --content-disposition
 
 # Downloading Img2Vid
-wget -O Img2Vid.safetensors -q https://civitai.com/api/download/models/234212
+wget https://civitai.com/api/download/models/234212 --content-disposition
 
 # Downloading Img2Vid-xt
-wget -O Img2Vid-xt.safetensors -q https://civitai.com/api/download/models/234202
+wget https://civitai.com/api/download/models/234202 --content-disposition
 
 # Install Deforum
 cd workspace/stable-diffusion-webui/extensions/deforum
