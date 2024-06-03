@@ -6,7 +6,7 @@
 
 ### Edit the following arrays to suit your workflow - values must be quoted and separated by newlines or spaces.
 
-DISK_GB_REQUIRED=400
+DISK_GB_REQUIRED=200
 
 # Download and prepare the replacement files
 git clone https://github.com/lllyasviel/stable-diffusion-webui-forge /tmp/stable-diffusion-webui-forge/
@@ -19,16 +19,6 @@ MAMBA_PACKAGES=(
   
 PIP_PACKAGES=(
     "bitsandbytes==0.41.2.post2"
-    "basicsr==1.4.2" 
-    "imageio_ffmpeg" 
-    "av" 
-    "moviepy" 
-    "numexpr" 
-    "mutagen" 
-    "scikit-image==0.19.2 --no-cache-dir" 
-    "ezsynth" 
-    "ffmpeg" 
-    "onnxruntime"
   )
 
 EXTENSIONS=(
@@ -53,26 +43,6 @@ CHECKPOINT_MODELS=(
     "https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.ckpt"
     "https://huggingface.co/XpucT/Deliberate/resolve/main/Deliberate_v6-inpainting.safetensors"
     "https://huggingface.co/XpucT/Deliberate/resolve/main/Deliberate_v6.safetensors"
-    "https://civitai.com/api/download/models/245627"
-    "https://civitai.com/api/download/models/351306"
-    "https://civitai.com/api/download/models/72396"
-    "https://civitai.com/api/download/models/99805"
-    "https://civitai.com/api/download/models/140423"
-    "https://civitai.com/api/download/models/524897"
-    "https://civitai.com/api/download/models/520858"
-    "https://civitai.com/api/download/models/528769"
-    "https://civitai.com/api/download/models/356472"
-    "https://civitai.com/api/download/models/488645"
-    "https://civitai.com/api/download/models/343567"
-    "https://civitai.com/api/download/models/471120"
-    "https://civitai.com/api/download/models/536812"
-    "https://civitai.com/api/download/models/505697"
-    "https://civitai.com/api/download/models/242179"
-    "https://civitai.com/api/download/models/396524"
-    "https://civitai.com/api/download/models/537505"
-    "https://civitai.com/api/download/models/495292"
-    "https://civitai.com/api/download/models/501240"
-    "https://civitai.com/api/download/models/245598"
 )
 
 LORA_MODELS=(
@@ -170,19 +140,19 @@ wget -O v2_lora_RollingAntiClockwise.ckpt -q https://huggingface.co/guoyww/anima
 cd /workspace/stable-diffusion-webui/embeddings
 
 # Get Embeddings
-wget https://civitai.com/api/download/models/399643 --content-disposition
-wget https://civitai.com/api/download/models/396717 --content-disposition
-wget https://civitai.com/api/download/models/82745 --content-disposition
-wget https://civitai.com/api/download/models/42247 --content-disposition
-wget https://civitai.com/api/download/models/36426 --content-disposition
-wget https://civitai.com/api/download/models/539032 --content-disposition
-wget https://civitai.com/api/download/models/5382 --content-disposition
-wget https://civitai.com/api/download/models/20387 --content-disposition
-wget https://civitai.com/api/download/models/5637 --content-disposition
-wget https://civitai.com/api/download/models/9208 --content-disposition
-wget https://civitai.com/api/download/models/98441 --content-disposition
-wget https://civitai.com/api/download/models/57451 --content-disposition
-wget https://civitai.com/api/download/models/125849 --content-disposition
+wget https://civitai.com/api/download/models/399643 
+wget https://civitai.com/api/download/models/396717
+wget https://civitai.com/api/download/models/82745
+wget https://civitai.com/api/download/models/42247
+wget https://civitai.com/api/download/models/36426
+wget https://civitai.com/api/download/models/539032
+wget https://civitai.com/api/download/models/5382
+wget https://civitai.com/api/download/models/20387
+wget https://civitai.com/api/download/models/5637 
+wget https://civitai.com/api/download/models/9208
+wget https://civitai.com/api/download/models/98441
+wget https://civitai.com/api/download/models/57451
+wget https://civitai.com/api/download/models/125849
 
 apt install nano -y
 nano /workspace/stable-diffusion-webui/ui-config.json
