@@ -25,6 +25,13 @@ EXTENSIONS=(
     "https://github.com/lllyasviel/ControlNet-v1-1-nightly"
     "https://github.com/continue-revolution/sd-forge-animatediff"
     "https://github.com/deforum-art/sd-forge-deforum"
+    "https://github.com/continue-revolution/sd-webui-segment-anything"
+    "https://github.com/miaoshouai/miaoshouai-assistant"
+    "https://github.com/hotshotco/Hotshot-XL-Automatic1111"
+    "https://github.com/volotat/SD-CN-Animation"
+    "https://github.com/Scholar01/sd-webui-mov2mov"
+    "https://github.com/LonicaMewinsky/gif2gif.git"
+    "https://github.com/wcde/sd-webui-kohya-hiresfix"
 )
 
 # Renaming Extensions
@@ -159,6 +166,12 @@ nano /workspace/stable-diffusion-webui/ui-config.json
 
 "txt2img/Width/maximum": 8192,
 "txt2img/Height/maximum": 8192,
+
+cd /stable-diffusion-webui/models/Stable-diffusion/SDXL
+wget https://huggingface.co/hotshotco/SDXL-512/blob/main/hsxl_base_1.0.f16.safetensors
+
+cd /stable-diffusion-webui/extensions/Hotshot-XL-Automatic1111/model
+wget https://huggingface.co/hotshotco/Hotshot-XL/resolve/main/hsxl_temporal_layers.f16.safetensors
 
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
 
