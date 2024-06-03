@@ -12,12 +12,6 @@ DISK_GB_REQUIRED=400
 git clone https://github.com/lllyasviel/stable-diffusion-webui-forge /tmp/stable-diffusion-webui-forge/
 rsync -avzh /tmp/stable-diffusion-webui-forge/ /workspace/stable-diffusion-webui/
 
-apt install nano -y
-nano /workspace/stable-diffusion-webui/ui-config.json
-
-"txt2img/Width/maximum": 8192,
-"txt2img/Height/maximum": 8192,
-
 MAMBA_PACKAGES=(
     "package1"
     "package2=version"
@@ -188,6 +182,12 @@ wget https://civitai.com/api/download/models/9208 --content-disposition
 wget https://civitai.com/api/download/models/98441 --content-disposition
 wget https://civitai.com/api/download/models/57451 --content-disposition
 wget https://civitai.com/api/download/models/125849 --content-disposition
+
+apt install nano -y
+nano /workspace/stable-diffusion-webui/ui-config.json
+
+"txt2img/Width/maximum": 8192,
+"txt2img/Height/maximum": 8192,
 
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
 
