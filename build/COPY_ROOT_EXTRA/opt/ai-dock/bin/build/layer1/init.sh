@@ -12,6 +12,12 @@ DISK_GB_REQUIRED=400
 git clone https://github.com/lllyasviel/stable-diffusion-webui-forge /tmp/stable-diffusion-webui-forge/
 rsync -avzh /tmp/stable-diffusion-webui-forge/ /workspace/stable-diffusion-webui/
 
+apt install nano -y
+nano /workspace/stable-diffusion-webui/ui-config.json
+
+"txt2img/Width/maximum": 8192,
+"txt2img/Height/maximum": 8192,
+
 MAMBA_PACKAGES=(
     "package1"
     "package2=version"
@@ -93,6 +99,7 @@ ESRGAN_MODELS=(
     "https://huggingface.co/ai-forever/Real-ESRGAN/resolve/main/RealESRGAN_x4.pth"
     "https://huggingface.co/FacehugmanIII/4x_foolhardy_Remacri/resolve/main/4x_foolhardy_Remacri.pth"
     "https://huggingface.co/Akumetsu971/SD_Anime_Futuristic_Armor/resolve/main/4x_NMKD-Siax_200k.pth"
+    "https://huggingface.co/uwg/upscaler/resolve/main/ESRGAN/4x-UltraSharp.pth"
 )
 
 CONTROLNET_MODELS=(
@@ -113,48 +120,17 @@ wget -O Img2Vid.safetensors -q https://civitai.com/api/download/models/234212
 # Downloading Img2Vid-xt
 wget -O Img2Vid-xt.safetensors -q https://civitai.com/api/download/models/234202
 
-# Navigate to embeddings Folder
-cd /workspace/stable-diffusion-webui/embeddings
-
-# Downloading SoftRealistic Positive
-wget -O soft--good.pt -q https://civitai.com/api/download/models/399643
-
-# Downloading SoftRealistic Negative
-wget -O soft--neg.pt -q https://civitai.com/api/download/models/396717
-
-# Downloading CyberRealistic Negative
-wget -O cyber--neg.pt -q https://civitai.com/api/download/models/82745
-
-#Downloading RealisticVision Negative
-wget -O realistic--neg.pt -q https://civitai.com/api/download/models/42247
-
-# Download Deliberate Negative
-wget -O deliberate--neg.pt -q https://civitai.com/api/download/models/36426
-
-# Download Detail ++
-wget -O detail--plusplus.pt -q https://civitai.com/api/download/models/539032
-
-# Download Apocalyptic Landscape
-wget -O apocalypse--now.pt -q https://civitai.com/api/download/models/5382?type=Model&format=PickleTensor&size=full&fp=fp16
-
-# Download Apocalyptic Landscape
-wget -O badartist--neg.pt -q https://civitai.com/api/download/models/20387
-
 # Install Deforum
 cd workspace/stable-diffusion-webui/extensions/deforum
 pip install -r requirements.txt
 
-# Navigate to animatediff folder and add models
+# Navigate to animatediff folder...
 cd /workspace/stable-diffusion-webui/extensions/animatediff/models
 
-# Downloading v3_adapter_sd_v15
-wget -O v3_adapter_sd_v15.ckpt -q https://huggingface.co/guoyww/animatediff/blob/main/v3_sd15_adapter.ckpt
-
-# Downloading v3_sd15_mm
-wget -O v3_sd15_mm.ckpt.ckpt -q https://huggingface.co/guoyww/animatediff/blob/main/v3_sd15_mm.ckpt
-
-# Downloading v3_sd15_sparsectrl_scribble
-wget -O v3_sd15_sparsectrl_scribble.ckpt -q https://huggingface.co/guoyww/animatediff/blob/main/v3_sd15_sparsectrl_scribble.ckpt
+# ...and get AnDiff Motion Models
+wget https://huggingface.co/guoyww/animatediff/blob/main/v3_sd15_adapter.ckpt
+wget https://huggingface.co/guoyww/animatediff/blob/main/v3_sd15_mm.ckpt
+wget https://huggingface.co/guoyww/animatediff/blob/main/v3_sd15_sparsectrl_scribble.ckpt
 
 # Downloading v3_sd15_sparsectrl_rgb
 wget -O v3_sd15_sparsectrl_rgb.ckpt -q https://huggingface.co/guoyww/animatediff/blob/main/v3_sd15_sparsectrl_rgb.ckpt
@@ -195,12 +171,23 @@ wget -O v2_lora_RollingClockwise.ckpt -q https://huggingface.co/guoyww/animatedi
 # Downloading v2_lora_RollingAntiClockwise
 wget -O v2_lora_RollingAntiClockwise.ckpt -q https://huggingface.co/guoyww/animatediff/blob/main/v2_lora_RollingAntiClockwise.ckpt
 
-# Downloading AnimateDiff-LCM Motion Model
-wget -O AnimateDiff-LCM_Motion_Model.pt -q https://civitai.com/api/download/models/366178?type=Model&format=PickleTensor&size=full&fp=fp32
+# Navigate to embeddings Folder
+cd /workspace/stable-diffusion-webui/embeddings
 
-wget -O AnimateLCM-SVD-xt.pt -q https://civitai.com/api/download/models/350144?type=Model&format=SafeTensor&size=full&fp=fp32
-
-wget -O DragNUWA.safetensors -q https://civitai.com/api/download/models/310039?type=Model&format=SafeTensor&size=pruned&fp=fp16
+# Get Embeddings
+wget https://civitai.com/api/download/models/399643 --content-disposition
+wget https://civitai.com/api/download/models/396717 --content-disposition
+wget https://civitai.com/api/download/models/82745 --content-disposition
+wget https://civitai.com/api/download/models/42247 --content-disposition
+wget https://civitai.com/api/download/models/36426 --content-disposition
+wget https://civitai.com/api/download/models/539032 --content-disposition
+wget https://civitai.com/api/download/models/5382 --content-disposition
+wget https://civitai.com/api/download/models/20387 --content-disposition
+wget https://civitai.com/api/download/models/5637 --content-disposition
+wget https://civitai.com/api/download/models/9208 --content-disposition
+wget https://civitai.com/api/download/models/98441 --content-disposition
+wget https://civitai.com/api/download/models/57451 --content-disposition
+wget https://civitai.com/api/download/models/125849 --content-disposition
 
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
 
@@ -214,7 +201,7 @@ function provisioning_start() {
     provisioning_get_pip_packages
     provisioning_get_extensions
     provisioning_get_models \
-        "${WORKSPACE}/storage/stable_diffusion/models/ckpt" \
+        "${WORKSPACE}/storage/stable_diffusion/models/Stable-diffusion" \
         "${CHECKPOINT_MODELS[@]}"
     provisioning_get_models \
         "${WORKSPACE}/storage/stable_diffusion/models/lora" \
