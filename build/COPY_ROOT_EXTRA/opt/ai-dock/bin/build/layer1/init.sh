@@ -38,15 +38,15 @@ mv /workspace/stable-diffusion-webui/extensions/sd-webui-mov2mov /workspace/stab
 mv /workspace/stable-diffusion-webui/extensions/SD-CN-Animation /workspace/stable-diffusion-webui/extensions/sd-cn
 
 # install Deforum dependencies
-cd /workspace/stable-diffusion-webui/deforum
+cd /workspace/stable-diffusion-webui/extensions/deforum
 pip install -r requirements.txt
 
 # install Mov2Mov dependencies
-cd /workspace/stable-diffusion-webui/mov2mov
+cd /workspace/stable-diffusion-webui/extensions/mov2mov
 pip install -r requirements.txt
 
 # install SD-CN dependencies
-cd /workspace/stable-diffusion-webui/sd-cn
+cd /workspace/stable-diffusion-webui/extensions/sd-cn
 pip install -r requirements.txt
 
 CHECKPOINT_MODELS=(
