@@ -28,7 +28,7 @@ EXTENSIONS=(
     "https://github.com/deforum-art/sd-forge-deforum"
     "https://github.com/Gourieff/sd-webui-reactor"
     "https://github.com/volotat/SD-CN-Animation"
-    "https://github.com/Scholar01/sd-webui-mov2mov"
+    "https://github.com/VBVerduijn/sd-webui-mov2mov"
 )
 
 # rename repos
