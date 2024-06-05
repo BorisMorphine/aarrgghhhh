@@ -13,14 +13,12 @@ rsync -avzh /tmp/stable-diffusion-webui-forge/ /workspace/stable-diffusion-webui
 DISK_GB_REQUIRED=300
 
 MAMBA_PACKAGES=(
-    "package1"
-    "package2=version"
+    #"package1"
+    #"package2=version"
   )
   
 PIP_PACKAGES=(
     "bitsandbytes==0.41.2.post2"
-    "ffmpeg"
-    "insightface"
   )
 
 EXTENSIONS=(
@@ -30,24 +28,6 @@ EXTENSIONS=(
     "https://github.com/volotat/SD-CN-Animation"
     "https://github.com/VBVerduijn/sd-webui-mov2mov"
 )
-
-# rename repos
-mv /workspace/stable-diffusion-webui/extensions/ControlNet-v1-1-nightly /workspace/stable-diffusion-webui/extensions/controlnet
-mv /workspace/stable-diffusion-webui/extensions/sd-forge-deforum /workspace/stable-diffusion-webui/extensions/deforum
-mv /workspace/stable-diffusion-webui/extensions/sd-webui-mov2mov /workspace/stable-diffusion-webui/extensions/mov2mov
-mv /workspace/stable-diffusion-webui/extensions/SD-CN-Animation /workspace/stable-diffusion-webui/extensions/sd-cn
-
-# install Deforum dependencies
-cd /workspace/stable-diffusion-webui/extensions/deforum
-pip install -r requirements.txt
-
-# install Mov2Mov dependencies
-cd /workspace/stable-diffusion-webui/extensions/mov2mov
-pip install -r requirements.txt
-
-# install SD-CN dependencies
-cd /workspace/stable-diffusion-webui/extensions/sd-cn
-pip install -r requirements.txt
 
 CHECKPOINT_MODELS=(
     "https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.ckpt"
@@ -103,6 +83,10 @@ CONTROLNET_MODELS=(
     #"https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_softedge.pth"
     #"https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_softedge.yaml"   
 )
+
+# install Deforum dependencies
+cd /workspace/stable-diffusion-webui/extensions/sd-forge-deforum
+pip install -r requirements.txt
 
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
 
