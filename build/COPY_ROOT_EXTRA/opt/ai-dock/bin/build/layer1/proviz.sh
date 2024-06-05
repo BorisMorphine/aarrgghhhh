@@ -4,17 +4,17 @@
 
 # https://raw.githubusercontent.com/ai-dock/stable-diffusion-webui/main/config/provisioning/default.sh
 
-### Edit the following arrays to suit your workflow - values must be quoted and separated by newlines or spaces.
-
-DISK_GB_REQUIRED=200
-
 # Download and prepare the replacement files
 git clone https://github.com/lllyasviel/stable-diffusion-webui-forge /tmp/stable-diffusion-webui-forge/
 rsync -avzh /tmp/stable-diffusion-webui-forge/ /workspace/stable-diffusion-webui/
 
+### Edit the following arrays to suit your workflow - values must be quoted and separated by newlines or spaces.
+
+DISK_GB_REQUIRED=200
+
 MAMBA_PACKAGES=(
-    "package1"
-    "package2=version"
+    #"package1"
+    #"package2=version"
   )
   
 PIP_PACKAGES=(
@@ -23,42 +23,28 @@ PIP_PACKAGES=(
 
 EXTENSIONS=(
     "https://github.com/lllyasviel/ControlNet-v1-1-nightly"
-    "https://github.com/continue-revolution/sd-forge-animatediff"
     "https://github.com/deforum-art/sd-forge-deforum"
-    "https://github.com/continue-revolution/sd-webui-segment-anything"
-    "https://github.com/miaoshouai/miaoshouai-assistant"
-    "https://github.com/hotshotco/Hotshot-XL-Automatic1111"
+    "https://github.com/miaoshouai/miaoshouai-assistant.git"
+    "https://github.com/adieyal/sd-dynamic-prompts"
+    "https://github.com/ototadana/sd-face-editor"
+    "https://github.com/AlUlkesh/stable-diffusion-webui-images-browser"
+    "https://github.com/hako-mikan/sd-webui-regional-prompter"
+    "https://github.com/Coyote-A/ultimate-upscale-for-automatic1111"
+    "https://github.com/fkunn1326/openpose-editor"
+    "https://github.com/Gourieff/sd-webui-reactor"
     "https://github.com/volotat/SD-CN-Animation"
-    "https://github.com/Scholar01/sd-webui-mov2mov"
-    "https://github.com/LonicaMewinsky/gif2gif.git"
-    "https://github.com/wcde/sd-webui-kohya-hiresfix"
+    "https://github.com/Scholar01/sd-webui-mov2mov.git"
 )
 
-# Renaming Extensions
-mv workspace/stable-diffusion-webui/extensions/sd-forge-deforum workspace/stable-diffusion-webui/extensions/deforum
-
-# Renaming Extensions
-mv workspace/stable-diffusion-webui/extensions/ControlNet-v1-1-nightly workspace/stable-diffusion-webui/extensions/controlnet
-
-# Renaming Extensions
-mv workspace/stable-diffusion-webui/extensions/sd-forge-animatediff workspace/stable-diffusion-webui/extensions/animatediff
-
 CHECKPOINT_MODELS=(
-    "https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0.safetensors"
-    "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors"
-    "https://huggingface.co/stabilityai/stable-diffusion-2-1/resolve/main/v2-1_768-ema-pruned.ckpt"
     "https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.ckpt"
-    "https://huggingface.co/XpucT/Deliberate/resolve/main/Deliberate_v6-inpainting.safetensors"
-    "https://huggingface.co/XpucT/Deliberate/resolve/main/Deliberate_v6.safetensors"
+    "https://huggingface.co/stabilityai/stable-diffusion-2-1/resolve/main/v2-1_768-ema-pruned.ckpt"
+    "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors"
+    "https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0.safetensors"
 )
 
 LORA_MODELS=(
-    "https://civitai.com/api/download/models/445042"
-    "https://civitai.com/api/download/models/114163"
-    "https://civitai.com/api/download/models/161516"
-    "https://civitai.com/api/download/models/296828"
     "https://civitai.com/api/download/models/16576"
-    "https://civitai.com/api/download/models/7555"
 )
 
 VAE_MODELS=(
@@ -71,107 +57,31 @@ ESRGAN_MODELS=(
     "https://huggingface.co/ai-forever/Real-ESRGAN/resolve/main/RealESRGAN_x4.pth"
     "https://huggingface.co/FacehugmanIII/4x_foolhardy_Remacri/resolve/main/4x_foolhardy_Remacri.pth"
     "https://huggingface.co/Akumetsu971/SD_Anime_Futuristic_Armor/resolve/main/4x_NMKD-Siax_200k.pth"
-    "https://huggingface.co/uwg/upscaler/resolve/main/ESRGAN/4x-UltraSharp.pth"
+    "https://github.com/JingyunLiang/SwinIR/releases/download/v0.0/001_classicalSR_DF2K_s64w8_SwinIR-M_x8.pth"
+    "https://objectstorage.us-phoenix-1.oraclecloud.com/n/ax6ygfvpvzka/b/open-modeldb-files/o/16x-ESRGAN.pth"
 )
 
 CONTROLNET_MODELS=(
-    "https://huggingface.co/crishhh/animatediff_controlnet/resolve/main/controlnet_checkpoint.ckpt"
-    "https://huggingface.co/crishhh/animatediff_controlnet/resolve/main/motion_checkpoint_less_motion.ckpt"
-    "https://huggingface.co/crishhh/animatediff_controlnet/resolve/main/motion_checkpoint_more_motion.ckpt"
+    "https://civitai.com/api/download/models/67566?type=Model&format=SafeTensor&size=pruned&fp=fp16"
+    "https://civitai.com/api/download/models/67566?type=Config&format=Other"
+    "https://civitai.com/api/download/models/44736?type=Model&format=SafeTensor&size=pruned&fp=fp16"
+    "https://civitai.com/api/download/models/44736?type=Config&format=Other"
+    "https://civitai.com/api/download/models/44811?type=Model&format=SafeTensor&size=pruned&fp=fp16"
+    "https://civitai.com/api/download/models/44811?type=Config&format=Other"
+    "https://civitai.com/api/download/models/44716?type=Model&format=SafeTensor&size=pruned&fp=fp16"
+    "https://civitai.com/api/download/models/44716?type=Config&format=Other"
+    "https://civitai.com/api/download/models/44795?type=Model&format=SafeTensor&size=pruned&fp=fp16"
+    "https://civitai.com/api/download/models/44795?type=Config&format=Other"
+    "https://civitai.com/api/download/models/44787?type=Model&format=SafeTensor&size=pruned&fp=fp16"
+    "https://civitai.com/api/download/models/44787?type=Config&format=Other"
+    "https://civitai.com/api/download/models/44756?type=Model&format=SafeTensor&size=pruned&fp=fp16"
+    "https://civitai.com/api/download/models/44756?type=Config&format=Other"
+    "https://civitai.com/api/download/models/44873?type=Model&format=SafeTensor&size=pruned&fp=fp16"
+    "https://civitai.com/api/download/models/44873?type=Config&format=Other"
 )
 
-# Navigate to SVD Folder
-cd /workspace/stable-diffusion-webui/models/svd/
-
-# Downloading img2vid-xt-1.1
-wget https://civitai.com/api/download/models/329995 --content-disposition
-
-# Downloading Img2Vid
-wget https://civitai.com/api/download/models/234212 --content-disposition
-
-# Downloading Img2Vid-xt
-wget https://civitai.com/api/download/models/234202 --content-disposition
-
-# Install Deforum
-cd workspace/stable-diffusion-webui/extensions/deforum
+cd /workspace/stable-diffusion-webui/extensions/sd-forge-deforum
 pip install -r requirements.txt
-
-# Navigate to animatediff folder...
-cd /workspace/stable-diffusion-webui/extensions/animatediff/models
-
-# ...and get AnDiff Motion Models
-wget https://huggingface.co/guoyww/animatediff/blob/main/v3_sd15_adapter.ckpt
-wget https://huggingface.co/guoyww/animatediff/blob/main/v3_sd15_mm.ckpt
-wget https://huggingface.co/guoyww/animatediff/blob/main/v3_sd15_sparsectrl_scribble.ckpt
-
-# Downloading v3_sd15_sparsectrl_rgb
-wget -O v3_sd15_sparsectrl_rgb.ckpt -q https://huggingface.co/guoyww/animatediff/blob/main/v3_sd15_sparsectrl_rgb.ckpt
-
-# Downloading mm_sdxl_v10_beta
-wget -O mm_sdxl_v10_beta.ckpt -q https://huggingface.co/guoyww/animatediff/blob/main/v3_sd15_sparsectrl_rgb.ckpt
-
-# Downloading mm_sd_v15_v2
-wget -O mm_sd_v15_v2.ckpt -q https://huggingface.co/guoyww/animatediff/blob/main/mm_sdxl_v10_beta.ckpt
-
-if [ ! -d "/workspace/stable-diffusion-webui/models/MotionLORA" ]; then
-  mkdir -p /workspace/stable-diffusion-webui/models/MotionLORA
-fi
-
-cd /workspace/stable-diffusion-webui/models/MotionLORA
-
-# Downloading v2_lora_ZoomIn
-wget -O v2_lora_ZoomIn.ckpt -q https://huggingface.co/guoyww/animatediff/blob/main/mm_sd_v15_v2.ckpt
-
-# Downloading v2_lora_ZoomOut
-wget -O v2_lora_ZoomOut.ckpt -q https://huggingface.co/guoyww/animatediff/blob/main/v2_lora_ZoomIn.ckpt
-
-# Downloading v2_lora_PanLeft
-wget -O v2_lora_PanLeft.ckpt -q https://huggingface.co/guoyww/animatediff/blob/main/v2_lora_PanLeft.ckpt
-
-# Downloading v2_lora_PanRight
-wget -O v2_lora_PanRight.ckpt -q https://huggingface.co/guoyww/animatediff/blob/main/v2_lora_PanRight.ckpt
-
-# Downloading v2_lora_TiltUp
-wget -O v2_lora_TiltUp.ckpt -q https://huggingface.co/guoyww/animatediff/blob/main/v2_lora_TiltUp.ckpt
-
-# Downloading v2_lora_TiltDown
-wget -O v2_lora_TiltDown.ckpt -q https://huggingface.co/guoyww/animatediff/blob/main/v2_lora_TiltDown.ckpt
-
-# Downloading v2_lora_RollingClockwise
-wget -O v2_lora_RollingClockwise.ckpt -q https://huggingface.co/guoyww/animatediff/blob/main/v2_lora_RollingClockwise.ckpt
-
-# Downloading v2_lora_RollingAntiClockwise
-wget -O v2_lora_RollingAntiClockwise.ckpt -q https://huggingface.co/guoyww/animatediff/blob/main/v2_lora_RollingAntiClockwise.ckpt
-
-# Navigate to embeddings Folder
-cd /workspace/stable-diffusion-webui/embeddings
-
-# Get Embeddings
-wget https://civitai.com/api/download/models/399643 
-wget https://civitai.com/api/download/models/396717
-wget https://civitai.com/api/download/models/82745
-wget https://civitai.com/api/download/models/42247
-wget https://civitai.com/api/download/models/36426
-wget https://civitai.com/api/download/models/539032
-wget https://civitai.com/api/download/models/5382
-wget https://civitai.com/api/download/models/20387
-wget https://civitai.com/api/download/models/5637 
-wget https://civitai.com/api/download/models/9208
-wget https://civitai.com/api/download/models/98441
-wget https://civitai.com/api/download/models/57451
-wget https://civitai.com/api/download/models/125849
-
-apt install nano -y
-nano /workspace/stable-diffusion-webui/ui-config.json
-
-"txt2img/Width/maximum": 8192,
-"txt2img/Height/maximum": 8192,
-
-cd /stable-diffusion-webui/models/Stable-diffusion/SDXL
-wget https://huggingface.co/hotshotco/SDXL-512/blob/main/hsxl_base_1.0.f16.safetensors
-
-cd /stable-diffusion-webui/extensions/Hotshot-XL-Automatic1111/model
-wget https://huggingface.co/hotshotco/Hotshot-XL/resolve/main/hsxl_temporal_layers.f16.safetensors
 
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
 
@@ -204,7 +114,7 @@ function provisioning_start() {
     if [[ $XPU_TARGET = "CPU" ]]; then
         PLATFORM_FLAGS="--use-cpu all --skip-torch-cuda-test --no-half"
     fi
-    PROVISIONING_FLAGS="--skip-python-version-check --no-download-sd-model --do-not-download-clip --port 17860 --exit"
+    PROVISIONING_FLAGS="--skip-python-version-check --no-download-sd-model --do-not-download-clip --port 11404 --exit"
     FLAGS_COMBINED="${PLATFORM_FLAGS} $(cat /etc/a1111_webui_flags.conf) ${PROVISIONING_FLAGS}"
     
     # Start and exit because webui will probably require a restart
