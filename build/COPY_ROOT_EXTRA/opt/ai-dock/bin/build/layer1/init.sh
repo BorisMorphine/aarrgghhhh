@@ -38,6 +38,10 @@ EXTENSIONS=(
     "https://github.com/Scholar01/sd-webui-mov2mov"
 )
 
+mv /workspace/stable-diffusion-webui/extensions/ControlNet-v1-1-nightly /workspace/stable-diffusion-webui/extensions/controlnet
+mv /workspace/stable-diffusion-webui/extensions/sd-forge-deforum /workspace/stable-diffusion-webui/extensions/deforum
+mv /workspace/stable-diffusion-webui/extensions/sd-webui-mov2mov /workspace/stable-diffusion-webui/extensions/mov2mov
+mv /workspace/stable-diffusion-webui/extensions/SD-CN-Animation /workspace/stable-diffusion-webui/extensions/sd-cn
 
 CHECKPOINT_MODELS=(
     "https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.ckpt"
