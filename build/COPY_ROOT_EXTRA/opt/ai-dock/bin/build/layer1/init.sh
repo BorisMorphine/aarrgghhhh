@@ -6,7 +6,10 @@
 
 ### Edit the following arrays to suit your workflow - values must be quoted and separated by newlines or spaces.
 
-# Download and prepare the replacement files
+# goto
+cd /
+
+# get
 git clone https://github.com/lllyasviel/stable-diffusion-webui-forge /tmp/stable-diffusion-webui-forge/
 rsync -avzh /tmp/stable-diffusion-webui-forge/ /workspace/stable-diffusion-webui/
 
