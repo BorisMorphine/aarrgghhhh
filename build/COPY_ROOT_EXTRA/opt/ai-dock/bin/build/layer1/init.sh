@@ -6,12 +6,11 @@
 
 ### Edit the following arrays to suit your workflow - values must be quoted and separated by newlines or spaces.
 
-# goto
 cd /
 
-# get
-git clone https://github.com/lllyasviel/stable-diffusion-webui-forge /tmp/stable-diffusion-webui-forge/
-rsync -avzh /tmp/stable-diffusion-webui-forge/ /workspace/stable-diffusion-webui/
+git clone https://github.com/lllyasviel/stable-diffusion-webui-forge /opt/stable-diffusion-webui-forge/
+
+rsync -avzh /opt/stable-diffusion-webui-forge/ /workspace/stable-diffusion-webui/
 
 MAMBA_PACKAGES=(
     #"package1"
@@ -20,31 +19,12 @@ MAMBA_PACKAGES=(
   
 PIP_PACKAGES=(
     "bitsandbytes==0.41.2.post2"
-    "insightface"
-    "basicsr==1.4.2" 
-    "imageio_ffmpeg" 
-    "av" 
-    "moviepy" 
-    "numexpr" 
-    "mutagen" 
-    "scikit-image==0.19.2" 
-    "ezsynth" 
-    "ffmpeg" 
-    "onnxruntime"
   )
 
 EXTENSIONS=(
-    "https://github.com/Mikubill/sd-webui-controlnet"
-    "https://github.com/deforum-art/sd-webui-deforum"
-    "https://github.com/Filexor/Clip_IO"
-    "https://github.com/VBVerduijn/sd-webui-mov2mov"
-    "https://github.com/enlyth/sd-webui-riffusion"
-    "https://github.com/Coyote-A/ultimate-upscale-for-automatic1111"
-    "https://github.com/fkunn1326/openpose-editor"
-    "https://github.com/ashen-sensored/stable-diffusion-webui-two-shot"
-    "https://github.com/CiaraStrawberry/TemporalKit"
-    "https://github.com/AbyszOne/Abysz-LAB-Ext.git"
-    "https://github.com/s9roll7/ebsynth_utility.git"
+    "https://github.com/lllyasviel/ControlNet-v1-1-nightly"
+    "https://github.com/deforum-art/sd-forge-deforum"
+    "https://github.com/continue-revolution/sd-forge-animatediff"
 )
 
 CHECKPOINT_MODELS=(
