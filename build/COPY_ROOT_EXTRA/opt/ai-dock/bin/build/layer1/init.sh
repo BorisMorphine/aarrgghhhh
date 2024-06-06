@@ -10,8 +10,6 @@
 git clone https://github.com/lllyasviel/stable-diffusion-webui-forge /tmp/stable-diffusion-webui-forge/
 rsync -avzh /tmp/stable-diffusion-webui-forge/ /workspace/stable-diffusion-webui/
 
-DISK_GB_REQUIRED=300
-
 MAMBA_PACKAGES=(
     #"package1"
     #"package2=version"
@@ -19,31 +17,60 @@ MAMBA_PACKAGES=(
   
 PIP_PACKAGES=(
     "bitsandbytes==0.41.2.post2"
+    "insightface"
+    "basicsr==1.4.2" 
+    "imageio_ffmpeg" 
+    "av" 
+    "moviepy" 
+    "numexpr" 
+    "mutagen" 
+    "scikit-image==0.19.2" 
+    "ezsynth" 
+    "ffmpeg" 
+    "onnxruntime"
   )
 
 EXTENSIONS=(
-    "https://github.com/lllyasviel/ControlNet-v1-1-nightly"
-    "https://github.com/deforum-art/sd-forge-deforum"
-    "https://github.com/Gourieff/sd-webui-reactor"
-    "https://github.com/volotat/SD-CN-Animation"
+    "https://github.com/Mikubill/sd-webui-controlnet"
+    "https://github.com/deforum-art/sd-webui-deforum"
+    "https://github.com/Filexor/Clip_IO"
     "https://github.com/VBVerduijn/sd-webui-mov2mov"
+    "https://github.com/enlyth/sd-webui-riffusion"
+    "https://github.com/Coyote-A/ultimate-upscale-for-automatic1111"
+    "https://github.com/fkunn1326/openpose-editor"
+    "https://github.com/ashen-sensored/stable-diffusion-webui-two-shot"
+    "https://github.com/CiaraStrawberry/TemporalKit"
+    "https://github.com/AbyszOne/Abysz-LAB-Ext.git"
+    "https://github.com/s9roll7/ebsynth_utility.git"
 )
 
 CHECKPOINT_MODELS=(
     "https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.ckpt"
-    "https://civitai.com/api/download/models/488645"
-    "https://civitai.com/api/download/models/489217"
-    #"https://huggingface.co/stabilityai/stable-diffusion-2-1/resolve/main/v2-1_768-ema-pruned.ckpt"
-    #"https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors"
-    #"https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0.safetensors"
+    "https://huggingface.co/stabilityai/stable-diffusion-2-1/resolve/main/v2-1_768-ema-pruned.ckpt"
+    "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors"
+    "https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0.safetensors"
+    "https://civitai.com/api/download/models/133832"
+    "https://civitai.com/api/download/models/86329"
+    "https://civitai.com/api/download/models/11745"
+    "https://civitai.com/api/download/models/128713"
+    "https://civitai.com/api/download/models/351306"
+    "https://civitai.com/api/download/models/372799?type=Model&format=SafeTensor&size=pruned&fp=fp32"
 )
 
 LORA_MODELS=(
     "https://civitai.com/api/download/models/16576"
+    "https://civitai.com/api/download/models/61282"
+    "https://civitai.com/api/download/models/26503"
+    "https://civitai.com/api/download/models/93523"
+    "https://civitai.com/api/download/models/162602"
+    "https://civitai.com/api/download/models/61282"
+    "https://civitai.com/api/download/models/442216"
+    "https://civitai.com/api/download/models/426797"
+    "https://civitai.com/api/download/models/456744"
+    "https://civitai.com/api/download/models/449935"
 )
 
 VAE_MODELS=(
-    "https://civitai.com/api/download/models/488645"
     "https://huggingface.co/stabilityai/sd-vae-ft-ema-original/resolve/main/vae-ft-ema-560000-ema-pruned.safetensors"
     "https://huggingface.co/stabilityai/sd-vae-ft-mse-original/resolve/main/vae-ft-mse-840000-ema-pruned.safetensors"
     "https://huggingface.co/stabilityai/sdxl-vae/resolve/main/sdxl_vae.safetensors"
@@ -56,37 +83,27 @@ ESRGAN_MODELS=(
 )
 
 CONTROLNET_MODELS=(
-    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11e_sd15_ip2p.pth"
-    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11e_sd15_ip2p.yaml"
-    #"https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11e_sd15_shuffle.pth"
-    #"https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11e_sd15_shuffle.yaml"
-    #"https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1e_sd15_tile.pth"
-    #"https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1e_sd15_tile.yaml"
-    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_depth.pth"
-    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_depth.yaml"
-    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_canny.pth"
-    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_canny.yaml"
-    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_inpaint.pth"
-    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_inpaint.yaml"
-    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_lineart.pth"
-    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_lineart.yaml"
-    #"https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_mlsd.pth"
-    #"https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_mlsd.yaml"
-    #"https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_normalbae.pth"
-    #"https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_normalbae.yaml"
-    #"https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_openpose.pth"
-    #"https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_openpose.yaml"
-    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_scribble.pth"
-    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_scribble.yaml"
-    #"https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_seg.pth"
-    #"https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_seg.yaml"
-    #"https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_softedge.pth"
-    #"https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_softedge.yaml"   
+    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_canny-fp16.safetensors"
+    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_depth-fp16.safetensors"
+    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_hed-fp16.safetensors"
+    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_mlsd-fp16.safetensors"
+    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_normal-fp16.safetensors"
+    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_openpose-fp16.safetensors"
+    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_scribble-fp16.safetensors"
+    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_seg-fp16.safetensors"
+    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_canny-fp16.safetensors"
+    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_color-fp16.safetensors"
+    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_depth-fp16.safetensors"
+    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_keypose-fp16.safetensors"
+    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_openpose-fp16.safetensors"
+    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_seg-fp16.safetensors"
+    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_sketch-fp16.safetensors"
+    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_style-fp16.safetensors"
 )
 
-# install Deforum dependencies
-cd /workspace/stable-diffusion-webui/extensions/sd-forge-deforum
-pip install -r requirements.txt
+### Monkey Man
+cd /opt/stable-diffusion-webui/embeddings/
+wget -O CyberRealistic--neg https://civitai.com/api/download/models/82745?type=Negative&format=Other
 
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
 
@@ -119,7 +136,7 @@ function provisioning_start() {
     if [[ $XPU_TARGET = "CPU" ]]; then
         PLATFORM_FLAGS="--use-cpu all --skip-torch-cuda-test --no-half"
     fi
-    PROVISIONING_FLAGS="--skip-python-version-check --no-download-sd-model --do-not-download-clip --port 11404 --exit"
+    PROVISIONING_FLAGS="--skip-python-version-check --no-download-sd-model --do-not-download-clip --port 17860 --exit"
     FLAGS_COMBINED="${PLATFORM_FLAGS} $(cat /etc/a1111_webui_flags.conf) ${PROVISIONING_FLAGS}"
     
     # Start and exit because webui will probably require a restart
