@@ -2,9 +2,22 @@
 # This file will be sourced in init.sh
 # Namespace functions with provisioning_
 
+# Check for root privileges
+if [[ $EUID -ne 0 ]]; then
+   echo "This script must be run as root or with sudo. Re-running with sudo..."
+   sudo bash "$0" "$@"
+   exit $?
+fi
+
 # Clone and synchronize the Forge repository with the stable-diffusion-webui directory
-git clone -b main https://github.com/lllyasviel/stable-diffusion-webui-forge /workspace/stable-diffusion-webui-forge/
-rsync -avzh /workspace/stable-diffusion-webui-forge/ /workspace/stable-diffusion-webui/
+git clone -b main https://github.com/lllyasviel/stable-diffusion-webui-forge /workspace/stable-diffusion-webui-forge/ || {
+    echo "Failed to clone the repository."
+    exit 1
+}
+rsync -avzh /workspace/stable-diffusion-webui-forge/ /workspace/stable-diffusion-webui/ || {
+    echo "Failed to synchronize the repository."
+    exit 1
+}
 
 ### Edit the following arrays to suit your workflow - values must be quoted and separated by newlines or spaces.
 
@@ -65,8 +78,6 @@ CONTROLNET_MODELS=(
     "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_sketch-fp16.safetensors"
 )
 
-### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
-
 function build_extra_start() {
     source /opt/ai-dock/etc/environment.sh
     build_extra_get_mamba_packages
@@ -100,18 +111,18 @@ function build_extra_start() {
         --exit
     
     # Ensure pytorch hasn't been clobbered
-    $MAMBA_DEFAULT_RUN python /opt/ai-dock/tests/assert-torch-version.py
+    micromamba run -n webui python /opt/ai-dock/tests/assert-torch-version.py
 }
 
 function build_extra_get_mamba_packages() {
     if [[ -n $MAMBA_PACKAGES ]]; then
-        $MAMBA_INSTALL -n webui ${MAMBA_PACKAGES[@]}
+        micromamba install -n webui ${MAMBA_PACKAGES[@]}
     fi
 }
 
 function build_extra_get_pip_packages() {
     if [[ -n $PIP_PACKAGES ]]; then
-        micromamba run -n webui $PIP_INSTALL ${PIP_PACKAGES[@]}
+        micromamba run -n webui pip install ${PIP_PACKAGES[@]}
     fi
 }
 
@@ -125,14 +136,14 @@ function build_extra_get_extensions() {
                 printf "Updating extension: %s...\n" "${repo}"
                 ( cd "$path" && git pull )
                 if [[ -e $requirements ]]; then
-                    micromamba -n webui run ${PIP_INSTALL} -r "$requirements"
+                    micromamba run -n webui pip install -r "$requirements"
                 fi
             fi
         else
             printf "Downloading extension: %s...\n" "${repo}"
             git clone "${repo}" "${path}" --recursive
             if [[ -e $requirements ]]; then
-                micromamba -n webui run ${PIP_INSTALL} -r "${requirements}"
+                micromamba run -n webui pip install -r "${requirements}"
             fi
         fi
     done
@@ -164,3 +175,5 @@ build_extra_start
 fix-permissions.sh -o container
 rm /etc/ld.so.cache
 ldconfig
+cd /workspace/stable-diffusion-webui
+micromamba run -n webui python3 launch.py
