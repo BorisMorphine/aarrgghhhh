@@ -6,14 +6,11 @@
 
 ### Edit the following arrays to suit your workflow - values must be quoted and separated by newlines or spaces.
 
-DISK_GB_REQUIRED=200
-
-# Try this
-cd /
-
-# Download and prepare the replacement files from the dev2 branch
-git clone -b dev2 https://github.com/lllyasviel/stable-diffusion-webui-forge /workspace/stable-diffusion-webui-forge/
+# Download and prepare the replacement files from the main branch
+git clone -b main https://github.com/lllyasviel/stable-diffusion-webui-forge /workspace/stable-diffusion-webui-forge/
 rsync -avzh /workspace/stable-diffusion-webui-forge/ /workspace/stable-diffusion-webui/
+
+DISK_GB_REQUIRED=200
 
 MAMBA_PACKAGES=(
     "package1"
@@ -28,7 +25,6 @@ EXTENSIONS=(
     "https://github.com/lllyasviel/ControlNet-v1-1-nightly"
     "https://github.com/deforum-art/sd-forge-deforum"
     "https://github.com/VBVerduijn/sd-webui-mov2mov"
-    
 )
 
 CHECKPOINT_MODELS=(
@@ -80,7 +76,7 @@ function provisioning_start() {
     if [[ "${XPU_TARGET}" = "CPU" ]]; then
         PLATFORM_FLAGS="--use-cpu all --skip-torch-cuda-test --no-half"
     fi
-    PROVISIONING_FLAGS="--skip-python-version-check --no-download-sd-model --autolaunch"
+    PROVISIONING_FLAGS="--skip-python-version-check --xformers --cuda-malloc --no-half --no-half-vae --autolaunch"
     FLAGS_COMBINED="${PLATFORM_FLAGS} $(cat /etc/a1111_webui_flags.conf) ${PROVISIONING_FLAGS}"
     
     # Start and exit because webui will probably require a restart
