@@ -26,6 +26,7 @@ PIP_PACKAGES=(
     "imageio_ffmpeg"
     "rich"
     "gdown"
+    "insightface"
 )
 
 EXTENSIONS=(
